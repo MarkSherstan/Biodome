@@ -1,16 +1,17 @@
 EESchema Schematic File Version 4
+LIBS:Moisture-Sensor-cache
 EELAYER 30 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Capacitance Moisture Sensor"
-Date "2020-12-27"
+Date "2020-12-28"
 Rev "A"
 Comp "Mark Sherstan"
-Comment1 "All capacitors should be ceramic X7R"
-Comment2 "Manufactured PCB should be sealed in epoxy"
-Comment3 ""
+Comment1 "Capacitors should be ceramic 16V 10% X7R "
+Comment2 "Resistors should be 1/10W 5%"
+Comment3 "Manufactured PCB should be sealed in epoxy"
 Comment4 ""
 $EndDescr
 $Comp
@@ -18,7 +19,7 @@ L Device:R R1
 U 1 1 5FE8F3C9
 P 3200 2050
 F 0 "R1" V 3407 2050 50  0000 C CNN
-F 1 "R" V 3316 2050 50  0000 C CNN
+F 1 "150 ohm" V 3316 2050 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3130 2050 50  0001 C CNN
 F 3 "~" H 3200 2050 50  0001 C CNN
 	1    3200 2050
@@ -29,7 +30,7 @@ L Device:LED D1
 U 1 1 5FE8F924
 P 3900 2050
 F 0 "D1" H 3893 1795 50  0000 C CNN
-F 1 "LED" H 3893 1886 50  0000 C CNN
+F 1 "Green 2.2V 20mA" H 3893 1886 50  0000 C CNN
 F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3900 2050 50  0001 C CNN
 F 3 "~" H 3900 2050 50  0001 C CNN
 	1    3900 2050
@@ -58,7 +59,7 @@ U 1 1 5FE95D2E
 P 7150 2000
 F 0 "J1" H 7068 1675 50  0000 C CNN
 F 1 "Input" H 7068 1766 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical" H 7150 2000 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 7150 2000 50  0001 C CNN
 F 3 "~" H 7150 2000 50  0001 C CNN
 	1    7150 2000
 	-1   0    0    1   
@@ -485,79 +486,6 @@ F 3 "~" H 4700 4950 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4150 4950 4550 4950
-Wire Wire Line
-	5550 5200 6450 5200
-Wire Wire Line
-	6450 5200 6450 5250
-Wire Wire Line
-	6450 5250 5550 5250
-Wire Wire Line
-	5550 5250 5550 5300
-Wire Wire Line
-	5550 5300 6450 5300
-Wire Wire Line
-	6450 5300 6450 5350
-Wire Wire Line
-	6450 5350 5550 5350
-Wire Wire Line
-	5550 5350 5550 5400
-Wire Wire Line
-	5550 5400 6450 5400
-Wire Wire Line
-	6450 5400 6450 5450
-Wire Wire Line
-	6450 5450 5550 5450
-Wire Wire Line
-	5550 5450 5550 5500
-Wire Wire Line
-	5550 5500 6450 5500
-Wire Wire Line
-	6450 5500 6450 5550
-Wire Wire Line
-	6450 5550 5550 5550
-Wire Wire Line
-	5550 5550 5550 5600
-Wire Wire Line
-	5550 5600 6450 5600
-Wire Wire Line
-	6450 5600 6450 5650
-Wire Wire Line
-	6450 5650 5550 5650
-Wire Wire Line
-	5550 5650 5550 5700
-Wire Wire Line
-	5550 5700 6450 5700
-Wire Wire Line
-	6450 5700 6450 5750
-Wire Wire Line
-	6450 5750 5550 5750
-Wire Wire Line
-	5550 5750 5550 5800
-Wire Wire Line
-	5550 5800 6450 5800
-Wire Wire Line
-	6450 5800 6450 5850
-Wire Wire Line
-	6450 5850 5550 5850
-Wire Wire Line
-	5550 5850 5550 5900
-Wire Wire Line
-	5550 5900 6450 5900
-Wire Wire Line
-	6450 5900 6450 5950
-Wire Wire Line
-	6450 5950 5550 5950
-Wire Wire Line
-	5550 5950 5550 6000
-Wire Wire Line
-	5550 6000 6450 6000
-Wire Wire Line
-	4850 4950 5550 4950
-Wire Wire Line
-	5550 4950 5550 5200
-Connection ~ 5550 4950
-Wire Wire Line
-	5550 4950 6200 4950
 Text Notes 3150 1550 0    79   ~ 16
 Indicator LED
 $Comp
@@ -604,4 +532,16 @@ Wire Wire Line
 	9350 4800 9350 5200
 Wire Wire Line
 	8450 3650 7750 3650
+Wire Wire Line
+	4850 4950 6200 4950
+Wire Notes Line
+	5200 4700 5200 5200
+Wire Notes Line
+	5200 5200 5950 5200
+Wire Notes Line
+	5950 5200 5950 4700
+Wire Notes Line
+	5950 4700 5200 4700
+Text Notes 5250 4650 0    50   ~ 0
+Capacitor Trace
 $EndSCHEMATC
