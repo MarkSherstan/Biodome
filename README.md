@@ -4,9 +4,10 @@ Sensor suite and website interface for monitoring plants around the house. Inspi
 ## Things to Sense / Calculate
 - Photos / Image Processing 
 - Ambient humiditiy
-- Soil Humidity 
+- Soil moisture 
 - Temperature 
 - UV
+- Pressure (barometric)
 
 ## Ideas 
 - Make my own soil sensor

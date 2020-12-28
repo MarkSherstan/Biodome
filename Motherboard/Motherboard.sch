@@ -14,81 +14,510 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Analog_ADC:MCP3008 U?
-U 1 1 5FE86B2D
-P 6450 2750
-F 0 "U?" H 6450 3431 50  0000 C CNN
-F 1 "MCP3008" H 6450 3340 50  0000 C CNN
-F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 6550 2850 50  0001 C CNN
-F 3 "" H 6550 2850 50  0001 C CNN
-F 4 "Microchip Technology" H 6450 2750 50  0001 C CNN "Manufacturer"
-F 5 "MCP3008T-I/SL" H 6450 2750 50  0001 C CNN "Manufacturer #"
-F 6 "MCP3008T-I/SLCT-ND" H 6450 2750 50  0001 C CNN "Digi-Key #"
-F 7 "https://www.digikey.ca/en/products/detail/microchip-technology/MCP3008T-I-SL/319424" H 6450 2750 50  0001 C CNN "Digi-Key Link"
-	1    6450 2750
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector_Generic:Conn_02x20_Odd_Even J?
 U 1 1 5FE88B4B
-P 2700 2900
-F 0 "J?" H 2750 4017 50  0000 C CNN
-F 1 "Conn_02x20_Odd_Even" H 2750 3926 50  0000 C CNN
-F 2 "" H 2700 2900 50  0001 C CNN
-F 3 "~" H 2700 2900 50  0001 C CNN
-	1    2700 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5FE8B3EB
-P 3650 2200
-F 0 "#PWR?" H 3650 1950 50  0001 C CNN
-F 1 "GND" H 3655 2027 50  0000 C CNN
-F 2 "" H 3650 2200 50  0001 C CNN
-F 3 "" H 3650 2200 50  0001 C CNN
-	1    3650 2200
+P 2300 2100
+F 0 "J?" H 2350 3217 50  0000 C CNN
+F 1 "RPi 3B+" H 2350 3126 50  0000 C CNN
+F 2 "" H 2300 2100 50  0001 C CNN
+F 3 "~" H 2300 2100 50  0001 C CNN
+	1    2300 2100
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:+3.3V #PWR?
 U 1 1 5FE8B962
-P 2050 2000
-F 0 "#PWR?" H 2050 1850 50  0001 C CNN
-F 1 "+3.3V" H 2065 2173 50  0000 C CNN
-F 2 "" H 2050 2000 50  0001 C CNN
-F 3 "" H 2050 2000 50  0001 C CNN
-	1    2050 2000
+P 1100 1200
+F 0 "#PWR?" H 1100 1050 50  0001 C CNN
+F 1 "+3.3V" H 1100 1350 50  0000 C CNN
+F 2 "" H 1100 1200 50  0001 C CNN
+F 3 "" H 1100 1200 50  0001 C CNN
+	1    1100 1200
+	1    0    0    -1  
+$EndComp
+Text GLabel 1850 1300 0    50   Input ~ 0
+GPIO_2-SDA
+Text GLabel 1850 1400 0    50   Input ~ 0
+GPIO_3-SCL
+Wire Wire Line
+	1850 1300 2100 1300
+Wire Wire Line
+	1850 1400 2100 1400
+Wire Wire Line
+	2600 1300 3050 1300
+$Comp
+L Sensor:BME280 U?
+U 1 1 5FE914F1
+P 6250 5200
+F 0 "U?" H 5821 5246 50  0000 R CNN
+F 1 "BME280" H 5821 5155 50  0000 R CNN
+F 2 "Package_LGA:Bosch_LGA-8_2.5x2.5mm_P0.65mm_ClockwisePinNumbering" H 7750 4750 50  0001 C CNN
+F 3 "https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280-DS002.pdf" H 6250 5000 50  0001 C CNN
+	1    6250 5200
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR?
-U 1 1 5FE8C9DE
-P 3450 2000
-F 0 "#PWR?" H 3450 1850 50  0001 C CNN
-F 1 "+5V" H 3465 2173 50  0000 C CNN
-F 2 "" H 3450 2000 50  0001 C CNN
-F 3 "" H 3450 2000 50  0001 C CNN
-	1    3450 2000
+L Connector_Generic:Conn_01x04 J?
+U 1 1 5FE93691
+P 9250 1300
+F 0 "J?" H 9168 875 50  0000 C CNN
+F 1 "Power In" H 9168 966 50  0000 C CNN
+F 2 "" H 9250 1300 50  0001 C CNN
+F 3 "~" H 9250 1300 50  0001 C CNN
+	1    9250 1300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5FE9573B
+P 9800 3500
+F 0 "R?" V 10007 3500 50  0000 C CNN
+F 1 "R" V 9916 3500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 9730 3500 50  0001 C CNN
+F 3 "~" H 9800 3500 50  0001 C CNN
+	1    9800 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J?
+U 1 1 5FE9744A
+P 8500 3850
+F 0 "J?" H 8418 3525 50  0000 C CNN
+F 1 "Moisture 0" H 8418 3616 50  0000 C CNN
+F 2 "" H 8500 3850 50  0001 C CNN
+F 3 "~" H 8500 3850 50  0001 C CNN
+	1    8500 3850
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FE98B88
+P 8950 3950
+F 0 "#PWR?" H 8950 3700 50  0001 C CNN
+F 1 "GND" H 8955 3777 50  0000 C CNN
+F 2 "" H 8950 3950 50  0001 C CNN
+F 3 "" H 8950 3950 50  0001 C CNN
+	1    8950 3950
 	1    0    0    -1  
 $EndComp
-Text GLabel 2250 2100 0    50   Input ~ 0
-GPIO2-SDA
-Text GLabel 2250 2200 0    50   Input ~ 0
-GPIO3-SCL
 Wire Wire Line
-	2050 2000 2500 2000
+	8700 3950 8950 3950
+$Comp
+L power:+5V #PWR?
+U 1 1 5FE99F0F
+P 9700 1000
+F 0 "#PWR?" H 9700 850 50  0001 C CNN
+F 1 "+5V" H 9715 1173 50  0000 C CNN
+F 2 "" H 9700 1000 50  0001 C CNN
+F 3 "" H 9700 1000 50  0001 C CNN
+	1    9700 1000
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
-	2250 2100 2500 2100
+	9450 1100 9700 1100
 Wire Wire Line
-	2250 2200 2500 2200
+	9450 1200 9700 1200
 Wire Wire Line
-	3000 2000 3450 2000
+	9700 1200 9700 1100
+$Comp
+L power:GND #PWR?
+U 1 1 5FE9C2E6
+P 9700 1500
+F 0 "#PWR?" H 9700 1250 50  0001 C CNN
+F 1 "GND" H 9705 1327 50  0000 C CNN
+F 2 "" H 9700 1500 50  0001 C CNN
+F 3 "" H 9700 1500 50  0001 C CNN
+	1    9700 1500
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
-	3000 2100 3450 2100
+	9450 1300 9700 1300
 Wire Wire Line
-	3450 2000 3450 2100
-Connection ~ 3450 2000
+	9700 1300 9700 1400
 Wire Wire Line
-	3000 2200 3650 2200
+	9450 1400 9700 1400
+$Comp
+L power:+5VA #PWR?
+U 1 1 5FE9DE93
+P 3050 1200
+F 0 "#PWR?" H 3050 1050 50  0001 C CNN
+F 1 "+5VA" H 3050 1350 50  0000 C CNN
+F 2 "" H 3050 1200 50  0001 C CNN
+F 3 "" H 3050 1200 50  0001 C CNN
+	1    3050 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2600 1200 3050 1200
+Wire Wire Line
+	3050 1300 3050 1200
+Connection ~ 3050 1200
+Wire Wire Line
+	9700 1100 9700 1000
+Connection ~ 9700 1100
+Wire Wire Line
+	9700 1500 9700 1400
+Connection ~ 9700 1400
+$Comp
+L power:+5V #PWR?
+U 1 1 5FEA59B8
+P 9200 3850
+F 0 "#PWR?" H 9200 3700 50  0001 C CNN
+F 1 "+5V" H 9215 4023 50  0000 C CNN
+F 2 "" H 9200 3850 50  0001 C CNN
+F 3 "" H 9200 3850 50  0001 C CNN
+	1    9200 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 3850 9200 3850
+Text GLabel 9500 3300 1    50   Input ~ 0
+A0
+$Comp
+L Device:R R?
+U 1 1 5FEAAE4D
+P 9200 3500
+F 0 "R?" V 9407 3500 50  0000 C CNN
+F 1 "R" V 9316 3500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 9130 3500 50  0001 C CNN
+F 3 "~" H 9200 3500 50  0001 C CNN
+	1    9200 3500
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8700 3750 8900 3750
+Wire Wire Line
+	8900 3500 9050 3500
+Wire Wire Line
+	8900 3750 8900 3500
+Wire Wire Line
+	9350 3500 9500 3500
+$Comp
+L power:GND #PWR?
+U 1 1 5FEACDB9
+P 10100 3500
+F 0 "#PWR?" H 10100 3250 50  0001 C CNN
+F 1 "GND" H 10105 3327 50  0000 C CNN
+F 2 "" H 10100 3500 50  0001 C CNN
+F 3 "" H 10100 3500 50  0001 C CNN
+	1    10100 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9950 3500 10100 3500
+Wire Wire Line
+	9500 3500 9500 3300
+Connection ~ 9500 3500
+Wire Wire Line
+	9500 3500 9650 3500
+$Comp
+L power:GND #PWR?
+U 1 1 5FEBFF94
+P 1100 1600
+F 0 "#PWR?" H 1100 1350 50  0001 C CNN
+F 1 "GND" H 1100 1450 50  0000 C CNN
+F 2 "" H 1100 1600 50  0001 C CNN
+F 3 "" H 1100 1600 50  0001 C CNN
+	1    1100 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC0BFF
+P 1100 2400
+F 0 "#PWR?" H 1100 2150 50  0001 C CNN
+F 1 "GND" H 1100 2250 50  0000 C CNN
+F 2 "" H 1100 2400 50  0001 C CNN
+F 3 "" H 1100 2400 50  0001 C CNN
+	1    1100 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC1408
+P 1100 3100
+F 0 "#PWR?" H 1100 2850 50  0001 C CNN
+F 1 "GND" H 1100 2950 50  0000 C CNN
+F 2 "" H 1100 3100 50  0001 C CNN
+F 3 "" H 1100 3100 50  0001 C CNN
+	1    1100 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC2992
+P 3600 2800
+F 0 "#PWR?" H 3600 2550 50  0001 C CNN
+F 1 "GND" H 3600 2650 50  0000 C CNN
+F 2 "" H 3600 2800 50  0001 C CNN
+F 3 "" H 3600 2800 50  0001 C CNN
+	1    3600 2800
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC3478
+P 3600 2600
+F 0 "#PWR?" H 3600 2350 50  0001 C CNN
+F 1 "GND" H 3600 2450 50  0000 C CNN
+F 2 "" H 3600 2600 50  0001 C CNN
+F 3 "" H 3600 2600 50  0001 C CNN
+	1    3600 2600
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC4DB8
+P 3600 2100
+F 0 "#PWR?" H 3600 1850 50  0001 C CNN
+F 1 "GND" H 3600 1950 50  0000 C CNN
+F 2 "" H 3600 2100 50  0001 C CNN
+F 3 "" H 3600 2100 50  0001 C CNN
+	1    3600 2100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC57D7
+P 3600 1800
+F 0 "#PWR?" H 3600 1550 50  0001 C CNN
+F 1 "GND" H 3600 1650 50  0000 C CNN
+F 2 "" H 3600 1800 50  0001 C CNN
+F 3 "" H 3600 1800 50  0001 C CNN
+	1    3600 1800
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FEC601C
+P 3600 1400
+F 0 "#PWR?" H 3600 1150 50  0001 C CNN
+F 1 "GND" H 3600 1250 50  0000 C CNN
+F 2 "" H 3600 1400 50  0001 C CNN
+F 3 "" H 3600 1400 50  0001 C CNN
+	1    3600 1400
+	-1   0    0    -1  
+$EndComp
+Text GLabel 1850 1500 0    50   Input ~ 0
+GPIO_4-GPCLK0
+Wire Wire Line
+	1850 1500 2100 1500
+Text GLabel 1850 1700 0    50   Input ~ 0
+GPIO_17
+Text GLabel 1850 1800 0    50   Input ~ 0
+GPIO_27
+Text GLabel 1850 1900 0    50   Input ~ 0
+GPIO_22
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FECA3C7
+P 1100 2000
+F 0 "#PWR?" H 1100 1850 50  0001 C CNN
+F 1 "+3.3V" H 1100 2150 50  0000 C CNN
+F 2 "" H 1100 2000 50  0001 C CNN
+F 3 "" H 1100 2000 50  0001 C CNN
+	1    1100 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 1900 2100 1900
+Wire Wire Line
+	2100 1800 1850 1800
+Wire Wire Line
+	1850 1700 2100 1700
+Text GLabel 1850 2100 0    50   Input ~ 0
+GPIO_10-MOSI
+Text GLabel 1850 2200 0    50   Input ~ 0
+GPIO_9-MISO
+Text GLabel 1850 2300 0    50   Input ~ 0
+GPIO_11-SCLK
+Wire Wire Line
+	1850 2300 2100 2300
+Wire Wire Line
+	2100 2200 1850 2200
+Wire Wire Line
+	1850 2100 2100 2100
+Text GLabel 1850 2500 0    50   Input ~ 0
+GPIO_0
+Text GLabel 1850 2600 0    50   Input ~ 0
+GPIO_5
+Text GLabel 1850 2700 0    50   Input ~ 0
+GPIO_6
+Text GLabel 1850 2800 0    50   Input ~ 0
+GPIO_13-PWM1
+Text GLabel 1850 2900 0    50   Input ~ 0
+GPIO_19-PCMFS
+Text GLabel 1850 3000 0    50   Input ~ 0
+GPIO_26
+Wire Wire Line
+	1850 2500 2100 2500
+Wire Wire Line
+	2100 2600 1850 2600
+Wire Wire Line
+	1850 2700 2100 2700
+Wire Wire Line
+	2100 2800 1850 2800
+Wire Wire Line
+	1850 2900 2100 2900
+Wire Wire Line
+	2100 3000 1850 3000
+Text GLabel 2850 1500 2    50   Input ~ 0
+GPIO_14-TX
+Wire Wire Line
+	2600 1500 2850 1500
+Text GLabel 2850 1600 2    50   Input ~ 0
+GPIO_15-RX
+Wire Wire Line
+	2600 1600 2850 1600
+Text GLabel 2850 1700 2    50   Input ~ 0
+GPIO_18-CLK
+Wire Wire Line
+	2600 1700 2850 1700
+Text GLabel 2850 1900 2    50   Input ~ 0
+GPIO_23
+Text GLabel 2850 2000 2    50   Input ~ 0
+GPIO_24
+Wire Wire Line
+	2600 1900 2850 1900
+Wire Wire Line
+	2600 2000 2850 2000
+Text GLabel 2850 2200 2    50   Input ~ 0
+GPIO_25
+Wire Wire Line
+	2600 2200 2850 2200
+Text GLabel 2850 2300 2    50   Input ~ 0
+GPIO_8-CE0
+Text GLabel 2850 2400 2    50   Input ~ 0
+GPIO_7-CE1
+Text GLabel 2850 2500 2    50   Input ~ 0
+GPIO_1
+Wire Wire Line
+	2600 2500 2850 2500
+Wire Wire Line
+	2850 2400 2600 2400
+Wire Wire Line
+	2600 2300 2850 2300
+Text GLabel 2850 2700 2    50   Input ~ 0
+GPIO_12-PWM0
+Wire Wire Line
+	2600 2700 2850 2700
+Wire Wire Line
+	2600 1400 3600 1400
+Wire Wire Line
+	2600 1800 3600 1800
+Wire Wire Line
+	2600 2100 3600 2100
+Wire Wire Line
+	2600 2800 3600 2800
+Wire Wire Line
+	2600 2600 3600 2600
+Wire Wire Line
+	1100 1200 2100 1200
+Wire Wire Line
+	1100 1600 2100 1600
+Wire Wire Line
+	1100 2000 2100 2000
+Wire Wire Line
+	1100 2400 2100 2400
+Wire Wire Line
+	1100 3100 2100 3100
+Text GLabel 2850 2900 2    50   Input ~ 0
+GPIO_16
+Text GLabel 2850 3000 2    50   Input ~ 0
+GPIO_20
+Text GLabel 2850 3100 2    50   Input ~ 0
+GPIO_21
+Wire Wire Line
+	2600 2900 2850 2900
+Wire Wire Line
+	2850 3000 2600 3000
+Wire Wire Line
+	2850 3100 2600 3100
+Wire Wire Line
+	5200 2300 5400 2300
+Text GLabel 5200 2300 0    50   Input ~ 0
+GPIO_18-CLK
+Wire Wire Line
+	5950 3050 5800 3050
+Connection ~ 5950 3050
+Wire Wire Line
+	5950 3100 5950 3050
+Wire Wire Line
+	5800 3000 5800 3050
+Wire Wire Line
+	6100 3000 6100 3050
+Wire Wire Line
+	6100 3050 5950 3050
+$Comp
+L power:GND #PWR?
+U 1 1 5FF3C795
+P 5950 3100
+F 0 "#PWR?" H 5950 2850 50  0001 C CNN
+F 1 "GND" H 5950 2950 50  0000 C CNN
+F 2 "" H 5950 3100 50  0001 C CNN
+F 3 "" H 5950 3100 50  0001 C CNN
+	1    5950 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 1900 6100 1900
+Wire Wire Line
+	6500 1800 6500 1900
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FF384BD
+P 6500 1800
+F 0 "#PWR?" H 6500 1650 50  0001 C CNN
+F 1 "+3.3V" H 6500 1950 50  0000 C CNN
+F 2 "" H 6500 1800 50  0001 C CNN
+F 3 "" H 6500 1800 50  0001 C CNN
+	1    6500 1800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	5500 1900 5500 1800
+Wire Wire Line
+	5800 1900 5500 1900
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FF2B7EF
+P 5500 1800
+F 0 "#PWR?" H 5500 1650 50  0001 C CNN
+F 1 "+3.3V" H 5500 1950 50  0000 C CNN
+F 2 "" H 5500 1800 50  0001 C CNN
+F 3 "" H 5500 1800 50  0001 C CNN
+	1    5500 1800
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Analog_ADC:MCP3008 U?
+U 1 1 5FE86B2D
+P 6000 2400
+F 0 "U?" H 6000 3081 50  0000 C CNN
+F 1 "MCP3008" H 6000 2990 50  0000 C CNN
+F 2 "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" H 6100 2500 50  0001 C CNN
+F 3 "" H 6100 2500 50  0001 C CNN
+F 4 "Microchip Technology" H 6000 2400 50  0001 C CNN "Manufacturer"
+F 5 "MCP3008T-I/SL" H 6000 2400 50  0001 C CNN "Manufacturer #"
+F 6 "MCP3008T-I/SLCT-ND" H 6000 2400 50  0001 C CNN "Digi-Key #"
+F 7 "https://www.digikey.ca/en/products/detail/microchip-technology/MCP3008T-I-SL/319424" H 6000 2400 50  0001 C CNN "Digi-Key Link"
+	1    6000 2400
+	-1   0    0    -1  
+$EndComp
+Text GLabel 5200 2500 0    50   Input ~ 0
+GPIO_10-MOSI
+Text GLabel 5200 2400 0    50   Input ~ 0
+GPIO_9-MISO
+Wire Wire Line
+	5200 2400 5400 2400
+Wire Wire Line
+	5400 2500 5200 2500
+Text GLabel 5200 2600 0    50   Input ~ 0
+GPIO_8-CE0
+Wire Wire Line
+	5400 2600 5200 2600
+Text GLabel 6800 2100 2    50   Input ~ 0
+A0
+Wire Wire Line
+	6600 2100 6800 2100
 $EndSCHEMATC
