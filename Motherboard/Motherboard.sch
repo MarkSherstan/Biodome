@@ -1,10 +1,11 @@
 EESchema Schematic File Version 4
+LIBS:Motherboard-cache
 EELAYER 30 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
-Title "Biodome Motherboard"
+Title "Biodome RPi Motherboard"
 Date "2020-12-28"
 Rev "A"
 Comp "Mark Sherstan"
@@ -83,23 +84,23 @@ Wire Wire Line
 $Comp
 L power:+5V #PWR?
 U 1 1 5FE99F0F
-P 2400 7300
-F 0 "#PWR?" H 2400 7150 50  0001 C CNN
-F 1 "+5V" H 2415 7473 50  0000 C CNN
-F 2 "" H 2400 7300 50  0001 C CNN
-F 3 "" H 2400 7300 50  0001 C CNN
-	1    2400 7300
+P 2000 7400
+F 0 "#PWR?" H 2000 7250 50  0001 C CNN
+F 1 "+5V" H 2015 7573 50  0000 C CNN
+F 2 "" H 2000 7400 50  0001 C CNN
+F 3 "" H 2000 7400 50  0001 C CNN
+	1    2000 7400
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5FE9C2E6
-P 2400 7600
-F 0 "#PWR?" H 2400 7350 50  0001 C CNN
-F 1 "GND" H 2405 7427 50  0000 C CNN
-F 2 "" H 2400 7600 50  0001 C CNN
-F 3 "" H 2400 7600 50  0001 C CNN
-	1    2400 7600
+P 2000 7700
+F 0 "#PWR?" H 2000 7450 50  0001 C CNN
+F 1 "GND" H 2005 7527 50  0000 C CNN
+F 2 "" H 2000 7700 50  0001 C CNN
+F 3 "" H 2000 7700 50  0001 C CNN
+	1    2000 7700
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -686,36 +687,36 @@ Wire Wire Line
 $Comp
 L Device:LED D?
 U 1 1 60046450
-P 3250 7400
-F 0 "D?" H 3243 7145 50  0000 C CNN
-F 1 "LED" H 3243 7236 50  0000 C CNN
-F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3250 7400 50  0001 C CNN
-F 3 "~" H 3250 7400 50  0001 C CNN
-	1    3250 7400
+P 2850 7500
+F 0 "D?" H 2843 7245 50  0000 C CNN
+F 1 "LED" H 2843 7336 50  0000 C CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2850 7500 50  0001 C CNN
+F 3 "~" H 2850 7500 50  0001 C CNN
+	1    2850 7500
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:R R?
 U 1 1 60046FFA
-P 2750 7400
-F 0 "R?" V 2957 7400 50  0000 C CNN
-F 1 "R" V 2866 7400 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2680 7400 50  0001 C CNN
-F 3 "~" H 2750 7400 50  0001 C CNN
-	1    2750 7400
+P 2350 7500
+F 0 "R?" V 2557 7500 50  0000 C CNN
+F 1 "R" V 2466 7500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2280 7500 50  0001 C CNN
+F 3 "~" H 2350 7500 50  0001 C CNN
+	1    2350 7500
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	2900 7400 3100 7400
+	2500 7500 2700 7500
 $Comp
 L power:GND #PWR?
 U 1 1 60079B09
-P 3600 7400
-F 0 "#PWR?" H 3600 7150 50  0001 C CNN
-F 1 "GND" H 3600 7250 50  0000 C CNN
-F 2 "" H 3600 7400 50  0001 C CNN
-F 3 "" H 3600 7400 50  0001 C CNN
-	1    3600 7400
+P 3200 7500
+F 0 "#PWR?" H 3200 7250 50  0001 C CNN
+F 1 "GND" H 3200 7350 50  0000 C CNN
+F 2 "" H 3200 7500 50  0001 C CNN
+F 3 "" H 3200 7500 50  0001 C CNN
+	1    3200 7500
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -795,21 +796,21 @@ Wire Wire Line
 $Comp
 L Connector:Barrel_Jack J?
 U 1 1 600D3333
-P 1950 7500
-F 0 "J?" H 2007 7825 50  0000 C CNN
-F 1 "Barrel_Jack" H 2007 7734 50  0000 C CNN
-F 2 "" H 2000 7460 50  0001 C CNN
-F 3 "~" H 2000 7460 50  0001 C CNN
-	1    1950 7500
+P 1550 7600
+F 0 "J?" H 1607 7925 50  0000 C CNN
+F 1 "Barrel_Jack" H 1607 7834 50  0000 C CNN
+F 2 "" H 1600 7560 50  0001 C CNN
+F 3 "~" H 1600 7560 50  0001 C CNN
+	1    1550 7600
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2400 7600 2250 7600
+	2000 7700 1850 7700
 Text Notes 7250 3400 0    79   ~ 16
 Soil Moisture Sensors
 Text Notes 9050 700  0    79   ~ 16
 Auxilary
-Text Notes 2250 6100 0    79   ~ 16
+Text Notes 1900 5800 0    79   ~ 16
 Ambient Light
 Text Notes 5050 700  0    79   ~ 16
 Analog to Digital Converter (ADC)
@@ -843,17 +844,17 @@ Wire Wire Line
 	6700 2250 6900 2250
 Text Notes 1850 700  0    79   ~ 16
 RPi Interface
-Text Notes 2500 7000 0    79   ~ 16
+Text Notes 2100 7100 0    79   ~ 16
 Power In
 Wire Wire Line
-	3400 7400 3600 7400
+	3000 7500 3200 7500
 Wire Wire Line
-	2250 7400 2400 7400
+	1850 7500 2000 7500
 Wire Wire Line
-	2400 7300 2400 7400
-Connection ~ 2400 7400
+	2000 7400 2000 7500
+Connection ~ 2000 7500
 Wire Wire Line
-	2400 7400 2600 7400
+	2000 7500 2200 7500
 Text Notes 1350 3450 0    79   ~ 16
 Pressure, Humidity, and Temperature
 $Comp
@@ -1291,8 +1292,6 @@ Wire Wire Line
 Connection ~ 9400 5950
 Wire Wire Line
 	9400 5950 9550 5950
-Text Notes 2300 4500 0    59   ~ 0
-0x76
 $Comp
 L Connector_Generic:Conn_01x03 J?
 U 1 1 602A08A9
@@ -1469,4 +1468,194 @@ Text GLabel 8750 2350 2    50   Input ~ 0
 D12
 Text GLabel 9850 2350 2    50   Input ~ 0
 D13
+$Comp
+L Custom:VEML7700 U?
+U 1 1 5FECE0AE
+P 2350 6400
+F 0 "U?" H 2350 6765 50  0000 C CNN
+F 1 "VEML7700" H 2350 6674 50  0000 C CNN
+F 2 "" H 2350 6750 50  0001 C CNN
+F 3 "" H 2350 6750 50  0001 C CNN
+F 4 "Vishay Semiconductor Opto Division" H 2350 6400 50  0001 C CNN "Manufacturer"
+F 5 "VEML7700-TR" H 2350 6400 50  0001 C CNN "Manufacturer #"
+F 6 "VEML7700CT-ND" H 2350 6400 50  0001 C CNN "Digi-Key #"
+F 7 "https://www.digikey.ca/en/products/detail/vishay-semiconductor-opto-division/VEML7700-TR/5820243" H 2350 6400 50  0001 C CNN "Digi-Key LinkDigi LinkDigi-Key Link"
+	1    2350 6400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 5FECED0C
+P 5000 7350
+F 0 "H?" H 5100 7396 50  0000 L CNN
+F 1 "M3" H 5100 7305 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO7380_Pad" H 5000 7350 50  0001 C CNN
+F 3 "~" H 5000 7350 50  0001 C CNN
+	1    5000 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 5FED8470
+P 5450 7350
+F 0 "H?" H 5550 7396 50  0000 L CNN
+F 1 "M3" H 5550 7305 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO7380_Pad" H 5450 7350 50  0001 C CNN
+F 3 "~" H 5450 7350 50  0001 C CNN
+	1    5450 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 5FEE0C8B
+P 5000 7650
+F 0 "H?" H 5100 7696 50  0000 L CNN
+F 1 "M3" H 5100 7605 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO7380_Pad" H 5000 7650 50  0001 C CNN
+F 3 "~" H 5000 7650 50  0001 C CNN
+	1    5000 7650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 5FEE95FA
+P 5450 7650
+F 0 "H?" H 5550 7696 50  0000 L CNN
+F 1 "M3" H 5550 7605 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO7380_Pad" H 5450 7650 50  0001 C CNN
+F 3 "~" H 5450 7650 50  0001 C CNN
+	1    5450 7650
+	1    0    0    -1  
+$EndComp
+Text Notes 4800 7100 0    79   ~ 16
+Mounting Holes
+$Comp
+L Device:R R?
+U 1 1 5FF44F3F
+P 2950 6050
+F 0 "R?" H 2880 6004 50  0000 R CNN
+F 1 "4.7 kohm" H 2880 6095 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2880 6050 50  0001 C CNN
+F 3 "~" H 2950 6050 50  0001 C CNN
+	1    2950 6050
+	-1   0    0    1   
+$EndComp
+Text GLabel 3950 6500 2    50   Input ~ 0
+GPIO_2-SDA
+Text GLabel 3950 6300 2    50   Input ~ 0
+GPIO_3-SCL
+$Comp
+L Device:R R?
+U 1 1 5FF44F47
+P 3600 6050
+F 0 "R?" H 3530 6004 50  0000 R CNN
+F 1 "4.7 kohm" H 3530 6095 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3530 6050 50  0001 C CNN
+F 3 "~" H 3600 6050 50  0001 C CNN
+	1    3600 6050
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FF44F55
+P 2950 5800
+F 0 "#PWR?" H 2950 5650 50  0001 C CNN
+F 1 "+3.3V" H 2950 5950 50  0000 C CNN
+F 2 "" H 2950 5800 50  0001 C CNN
+F 3 "" H 2950 5800 50  0001 C CNN
+	1    2950 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FF44F5C
+P 3600 5800
+F 0 "#PWR?" H 3600 5650 50  0001 C CNN
+F 1 "+3.3V" H 3600 5950 50  0000 C CNN
+F 2 "" H 3600 5800 50  0001 C CNN
+F 3 "" H 3600 5800 50  0001 C CNN
+	1    3600 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3600 6200 3600 6300
+Wire Wire Line
+	2950 5800 2950 5900
+Wire Wire Line
+	3600 5800 3600 5900
+$Comp
+L power:GND #PWR?
+U 1 1 5FFE6C7A
+P 1750 6650
+F 0 "#PWR?" H 1750 6400 50  0001 C CNN
+F 1 "GND" H 1755 6477 50  0000 C CNN
+F 2 "" H 1750 6650 50  0001 C CNN
+F 3 "" H 1750 6650 50  0001 C CNN
+	1    1750 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 6500 1750 6500
+$Comp
+L Device:C C?
+U 1 1 5FFF2846
+P 1300 6450
+F 0 "C?" H 1415 6496 50  0000 L CNN
+F 1 "0.1 uF" H 1415 6405 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 1338 6300 50  0001 C CNN
+F 3 "~" H 1300 6450 50  0001 C CNN
+	1    1300 6450
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 60005D05
+P 750 6200
+F 0 "#PWR?" H 750 6050 50  0001 C CNN
+F 1 "+3.3V" H 750 6350 50  0000 C CNN
+F 2 "" H 750 6200 50  0001 C CNN
+F 3 "" H 750 6200 50  0001 C CNN
+	1    750  6200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	750  6200 750  6300
+$Comp
+L power:GND #PWR?
+U 1 1 600720A5
+P 1300 6650
+F 0 "#PWR?" H 1300 6400 50  0001 C CNN
+F 1 "GND" H 1305 6477 50  0000 C CNN
+F 2 "" H 1300 6650 50  0001 C CNN
+F 3 "" H 1300 6650 50  0001 C CNN
+	1    1300 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	750  6300 1300 6300
+Connection ~ 1300 6300
+Wire Wire Line
+	1300 6300 1850 6300
+Wire Wire Line
+	1300 6600 1300 6650
+Wire Wire Line
+	1750 6500 1750 6650
+Text Notes 1900 5900 0    59   ~ 0
+I2C Address: 0x10
+Text Notes 2000 3550 0    59   ~ 0
+I2C Address: 0x76
+Wire Wire Line
+	2850 6300 3600 6300
+Connection ~ 3600 6300
+Wire Wire Line
+	3600 6300 3950 6300
+Wire Wire Line
+	2850 6500 2950 6500
+Wire Wire Line
+	2950 6200 2950 6500
+Connection ~ 2950 6500
+Wire Wire Line
+	2950 6500 3950 6500
+Text Notes 5950 800  0    59   ~ 0
+SPI
 $EndSCHEMATC
