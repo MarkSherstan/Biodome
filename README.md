@@ -15,3 +15,7 @@ Sensor suite and website interface for monitoring plants around the house. Inspi
 - Slow logging... Dont burn out SD card
 - Use digital pin to wake up sensor (change to 3.3V 555 timer)
 - Double check barallel jack polarity
+
+## To Order
+https://www.digikey.ca/en/products/detail/adafruit-industries-llc/1988/7241480
+5V supply (barallel plug)
