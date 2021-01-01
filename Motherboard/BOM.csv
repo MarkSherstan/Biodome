@@ -1,0 +1,25 @@
+Reference, Quantity, Value, Footprint, Digi-Key #, Digi-Key Link, Manufacturer, Manufacturer #
+C1 C5,2,1 uF,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+C3 C2 C4,3,0.1 uF,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+D1,1,Blue 3.3V 20mA,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+D2,1,Green 2.2V 20mA,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+H1 H2 H3 H4,4,M3,MountingHole:MountingHole_3.2mm_M3_ISO7380_Pad,,,,
+J1,1,AUX Analog A,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J10,1,Moisture 4,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J11,1,Moisture 5,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J12,1,Power In,Connector_BarrelJack:BarrelJack_CUI_PJ-102AH_Horizontal,CP-102AH-ND,https://www.digikey.ca/en/products/detail/cui-devices/PJ-102AH/408448?s=N4IgTCBcDaIAoCkC0BGADGAggCRAXQF8g,CUI Devices,PJ-102AH
+J2,1,AUX Analog B,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J3,1,RPi 3B+,Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical,,,,
+J4,1,AUX Digital A,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J5,1,AUX Digital B,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J6,1,Moisture 0,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J7,1,Moisture 1,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J8,1,Moisture 2,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+J9,1,Moisture 3,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+R18,1,150 ohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R2 R4 R8 R10 R12 R14,6,1.7 kohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R3 R5 R9 R11 R13 R15,6,3.3 kohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R6 R7 R16 R17,4,4.7 kohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+U1,1,MCP3008,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm,MCP3008T-I/SLCT-ND,https://www.digikey.ca/en/products/detail/microchip-technology/MCP3008T-I-SL/319424,Microchip Technology,MCP3008T-I/SL
+U2,1,BME280,Package_LGA:Bosch_LGA-8_2.5x2.5mm_P0.65mm_ClockwisePinNumbering,828-1063-1-ND,https://www.digikey.ca/en/products/detail/bosch-sensortec/BME280/6136306,Bosch Sensortec,BME280
+U3,1,VEML7700,Custom:VEML7700,VEML7700CT-ND,https://www.digikey.ca/en/products/detail/vishay-semiconductor-opto-division/VEML7700-TR/5820243,Vishay Semiconductor Opto Division,VEML7700-TR
