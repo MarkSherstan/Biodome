@@ -1,0 +1,19 @@
+Reference, Quantity, Value, Footprint, Digi-Key #, Digi-Key Link,Manufacturer,Manufacturer #
+C1,1,470 pF,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+C2 C3,2,0.1 uF,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+C4,1,10 nF,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+C5,1,4.7 uF,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+D1,1,Green 2.2V 20mA,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+D2,1,4148,Diode_SMD:D_SOD-123,SMMSD4148T3GOSCT-ND,https://www.digikey.ca/en/products/detail/on-semiconductor/SMMSD4148T3G/3062785,ON Semiconductor,SMMSD4148T3G
+H1 H2,2,M2,MountingHole:MountingHole_2.2mm_M2_ISO14580_Pad,,,,
+J1,1,Input,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,,,,
+R1,1,150 ohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R2,1,DNP,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R3,1,0 ohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R4,1,1.5 kohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R5,1,2.4 kohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R6,1,100 ohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R7,1,10 kohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+R8,1,1 Mohm,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,,
+U1,1,LMV358,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,296-39049-5-ND,https://www.digikey.ca/en/products/detail/texas-instruments/LMV358ID/1510583,Texas Instruments,LMV358ID
+U2,1,NE555,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,296-6501-1-ND,https://www.digikey.ca/en/products/detail/texas-instruments/NE555DR/372491,Texas Instruments,NE555DR
