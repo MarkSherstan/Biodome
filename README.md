@@ -16,6 +16,8 @@ Sensor suite and webpage interface for monitoring plants around the house. Inspi
 
 ## PCB V2 Notes
 - Use digital pin to wake up sensor (change to 3.3V 555 timer)
+- Check backorder on BME280 - Not currently used for V1
+- Make the board act as a shield for the Pi (pins and mounting holes)
 
 ## To Order
 - RPi 40 pin cable: https://www.digikey.ca/en/products/detail/adafruit-industries-llc/1988/7241480
