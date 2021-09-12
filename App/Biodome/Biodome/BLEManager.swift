@@ -60,7 +60,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
-        selectedPeripheral.discoverServices(nil)
+//        selectedPeripheral.discoverServices(nil)
+    }
+       
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
+        print("Disconnected!")
     }
     
     func connect(ID: Int){
@@ -71,6 +75,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func disconnect(){
         print("Disconnect Peripheral")
+        centralManager.cancelPeripheralConnection(selectedPeripheral)
     }
     
     func startScanning() {
