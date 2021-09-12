@@ -18,6 +18,10 @@ struct Peripheral: Identifiable {
 
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
 
+    let soilMoisture = 67
+    let sunIntensity = 1000
+    let temperature = 24
+    
     var myCentral: CBCentralManager!
 
     @Published var isSwitchedOn = false
@@ -48,7 +52,6 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         }
        
         let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue)
-//        print(newPeripheral)
         peripherals.append(newPeripheral)
     }
     

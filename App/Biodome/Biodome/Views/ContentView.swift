@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-let soilMoisture = 67
-let sunIntensity = 1100
-let temperature = 24
+let bleManager = BLEManager()
 
 struct ContentView: View {
-//    @ObservedObject var bleManager = BLEManager()
     var Name: String
     
     var body: some View {
@@ -38,7 +35,7 @@ struct ContentView: View {
                         Text("Soil Moisture")
                             .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
                             .fontWeight(.bold)
-                        Text("\(soilMoisture) %")
+                        Text("\(bleManager.soilMoisture) %")
                             .font(.body)
                     }
                 }
@@ -53,7 +50,7 @@ struct ContentView: View {
                         Text("Light")
                             .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
                             .fontWeight(.bold)
-                        Text("\(sunIntensity) lux")
+                        Text("\(bleManager.sunIntensity) lux")
                             .font(.body)
                     }
                 }
@@ -68,24 +65,24 @@ struct ContentView: View {
                         Text("Temperature")
                             .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
                             .fontWeight(.bold)
-                        Text("\(temperature) °C")
+                        Text("\(bleManager.temperature) °C")
                             .font(.body)
                     }
                 }
             }
             
             // Scanning Buttons
-//            HStack {
-//                Button(action: {self.bleManager.connect()})
-//                    {Text("Connect")
-//                }
-//
-//                Spacer()
-//
-//                Button(action: {self.bleManager.disconnect()}) {
-//                    Text("Disconnect")
-//                }
-//            }.padding()
+            HStack {
+                Button(action: {bleManager.connect()})
+                    {Text("Connect")
+                }
+
+                Spacer()
+
+                Button(action: {bleManager.disconnect()}) {
+                    Text("Disconnect")
+                }
+            }.padding()
             
         }
         .padding()
