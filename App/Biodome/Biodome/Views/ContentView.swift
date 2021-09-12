@@ -14,13 +14,15 @@ let sunIntensity = 1100
 let temperature = 24
 
 struct ContentView: View {
+    var Name: String
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Biodome")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(Color.purple)
-            Text("V1.0")
+            Text(Name)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
@@ -81,11 +83,10 @@ struct ContentView: View {
         }
         .padding()
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(Name: "Some Name")
     }
 }

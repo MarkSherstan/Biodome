@@ -16,8 +16,7 @@ struct ScanView: View {
             VStack{
                 // List of Devices
                 List(bleManager.peripherals) { peripheral in
-                    
-                    NavigationLink(destination: ContentView()){
+                    NavigationLink(destination: ContentView(Name: peripheral.name)){
                         HStack {
                             Text(peripheral.name)
                             Spacer()
