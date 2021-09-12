@@ -48,7 +48,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         }
        
         let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue)
-        print(newPeripheral)
+//        print(newPeripheral)
         peripherals.append(newPeripheral)
     }
     

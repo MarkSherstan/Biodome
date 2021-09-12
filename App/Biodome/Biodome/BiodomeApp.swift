@@ -11,7 +11,8 @@ import SwiftUI
 struct BiodomeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ScanView()
+//            ContentView()
         }
     }
 }

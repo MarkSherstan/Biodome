@@ -12,43 +12,44 @@ struct ScanView: View {
     @ObservedObject var bleManager = BLEManager()
     
     var body: some View {
-        VStack{
-            // Header
-            Text("Bluetooth Devices")
-                .font(.largeTitle)
-                .frame(maxWidth: .infinity, alignment: .center)
-            
-            // List of Devices
-            List(bleManager.peripherals) { peripheral in
-                HStack {
-                    Text(peripheral.name)
-                    Spacer()
-                    Text(String(peripheral.rssi))
-                }
-            }.frame(height: 500)
-            Spacer()
-
-            // Scanning Buttons
-            HStack {
-                Button(action: {self.bleManager.startScanning()})
-                    {Text("Start Scanning")
-                }
-                
+        NavigationView {
+            VStack{
+                // List of Devices
+                List(bleManager.peripherals) { peripheral in
+                    
+                    NavigationLink(destination: ContentView()){
+                        HStack {
+                            Text(peripheral.name)
+                            Spacer()
+                            Text(String(peripheral.rssi))
+                        }
+                    }
+                }.frame(height: 600)
                 Spacer()
                 
-                Button(action: {self.bleManager.stopScanning()}) {
-                    Text("Stop Scanning")
+                // Scanning Buttons
+                HStack {
+                    Button(action: {self.bleManager.startScanning()})
+                        {Text("Start Scanning")
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {self.bleManager.stopScanning()}) {
+                        Text("Stop Scanning")
+                    }
+                }.padding()
+                
+                // Status
+                if bleManager.isSwitchedOn {
+                    Text("Bluetooth is ON")
+                        .foregroundColor(.green)
+                } else {
+                    Text("Bluetooth is OFF")
+                        .foregroundColor(.red)
                 }
-            }.padding()
+            }.navigationBarTitle("Bluetooth Devices", displayMode: .inline)
             
-            // Status
-            if bleManager.isSwitchedOn {
-                Text("Bluetooth is ON")
-                    .foregroundColor(.green)
-            } else {
-                Text("Bluetooth is OFF")
-                    .foregroundColor(.red)
-            }
         }
     }
 }
@@ -58,4 +59,3 @@ struct ScanView_Previews: PreviewProvider {
         ScanView()
     }
 }
-

@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+let BTL = BluetoothLink()
+
+let soilMoisture = 67
+let sunIntensity = 1100
+let temperature = 24
+
 struct ContentView: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,9 +37,7 @@ struct ContentView: View {
                         Text("Soil Moisture")
                             .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
                             .fontWeight(.bold)
-                        Text("Sensor A:")
-                            .font(.body)
-                        Text("Sensor B:")
+                        Text("\(soilMoisture) %")
                             .font(.body)
                     }
                 }
@@ -48,7 +52,7 @@ struct ContentView: View {
                         Text("Light")
                             .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
                             .fontWeight(.bold)
-                        Text("Sensor A:")
+                        Text("\(sunIntensity) lux")
                             .font(.body)
                     }
                 }
@@ -63,14 +67,21 @@ struct ContentView: View {
                         Text("Temperature")
                             .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
                             .fontWeight(.bold)
-                        Text("Sensor A:")
+                        Text("\(temperature) °C")
                             .font(.body)
                     }
                 }
             }
+            
+            Button("Scan"){
+                BTL.smash()
+                print(BTL.ii)
+            }
+            
         }
         .padding()
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
