@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-let BTL = BluetoothLink()
-
 let soilMoisture = 67
 let sunIntensity = 1100
 let temperature = 24
 
 struct ContentView: View {
+//    @ObservedObject var bleManager = BLEManager()
     var Name: String
     
     var body: some View {
@@ -75,10 +74,18 @@ struct ContentView: View {
                 }
             }
             
-            Button("Scan"){
-                BTL.smash()
-                print(BTL.ii)
-            }
+            // Scanning Buttons
+//            HStack {
+//                Button(action: {self.bleManager.connect()})
+//                    {Text("Connect")
+//                }
+//
+//                Spacer()
+//
+//                Button(action: {self.bleManager.disconnect()}) {
+//                    Text("Disconnect")
+//                }
+//            }.padding()
             
         }
         .padding()

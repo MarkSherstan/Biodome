@@ -12,7 +12,6 @@ struct BiodomeApp: App {
     var body: some Scene {
         WindowGroup {
             ScanView()
-//            ContentView()
         }
     }
 }

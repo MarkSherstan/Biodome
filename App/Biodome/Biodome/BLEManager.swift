@@ -52,23 +52,22 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         peripherals.append(newPeripheral)
     }
     
+    func connect(){
+        print("Connect")
+    }
+    
+    func disconnect(){
+        print("Disconnect")
+    }
+    
     func startScanning() {
-         print("startScanning")
+         print("Start scanning")
          myCentral.scanForPeripherals(withServices: nil, options: nil)
      }
     
     func stopScanning() {
-        print("stopScanning")
+        print("Stop scanning")
         myCentral.stopScan()
     }
 
-}
-
-
-class BluetoothLink {
-    var ii = 0
-        
-    func smash() -> Void {
-      self.ii += 1
-    }
 }
