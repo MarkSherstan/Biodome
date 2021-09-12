@@ -8,6 +8,7 @@
 import Foundation
 import CoreBluetooth
 
+let heartRateServiceCBUUID = CBUUID(string: "0x180D")
 
 struct Peripheral: Identifiable {
     let id: Int
@@ -23,7 +24,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     let sunIntensity = 1000
     let temperature = 24
     
-    var myCentral: CBCentralManager!
+    var centralManager: CBCentralManager!
+    var selectedPeripheral: CBPeripheral!
 
     @Published var isSwitchedOn = false
     @Published var peripherals = [Peripheral]()
@@ -31,8 +33,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     override init() {
         super.init()
 
-        myCentral = CBCentralManager(delegate: self, queue: nil)
-        myCentral.delegate = self
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+        centralManager.delegate = self
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -56,24 +58,30 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         peripherals.append(newPeripheral)
     }
     
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("Connected!")
+        selectedPeripheral.discoverServices(nil)
+    }
+    
     func connect(ID: Int){
-        print("Connect")
-        print(ID)
-        print(peripherals[ID])
+        print("Connect Peripheral")
+        selectedPeripheral = peripherals[ID].perph
+        centralManager.connect(selectedPeripheral)
     }
     
     func disconnect(){
-        print("Disconnect")
+        print("Disconnect Peripheral")
     }
     
     func startScanning() {
          print("Start scanning")
-         myCentral.scanForPeripherals(withServices: nil, options: nil)
+         // centralManager.scanForPeripherals(withServices: nil, options: nil)
+         centralManager.scanForPeripherals(withServices: [heartRateServiceCBUUID])
      }
     
     func stopScanning() {
         print("Stop scanning")
-        myCentral.stopScan()
+        centralManager.stopScan()
     }
 
 }
