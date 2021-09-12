@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ScanView: View {
     
-    @ObservedObject var bleManager = BLEManager()
+    @StateObject var bleManager = BLEManager()
     
     var body: some View {
         NavigationView {
             VStack{
                 // List of Devices
                 List(bleManager.peripherals) { peripheral in
-                    NavigationLink(destination: ContentView(Name: peripheral.name)){
+                    NavigationLink(destination: ContentView(Name: peripheral.name, ID: peripheral.id)){
                         HStack {
                             Text(peripheral.name)
                             Spacer()
@@ -48,8 +48,7 @@ struct ScanView: View {
                         .foregroundColor(.red)
                 }
             }.navigationBarTitle("Bluetooth Devices", displayMode: .inline)
-            
-        }
+        }.environmentObject(bleManager)
     }
 }
 

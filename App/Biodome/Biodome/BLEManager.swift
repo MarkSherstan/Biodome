@@ -13,6 +13,7 @@ struct Peripheral: Identifiable {
     let id: Int
     let name: String
     let rssi: Int
+    let perph: CBPeripheral
 }
 
 
@@ -51,12 +52,14 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
             peripheralName = "Unknown"
         }
        
-        let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue)
+        let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
         peripherals.append(newPeripheral)
     }
     
-    func connect(){
+    func connect(ID: Int){
         print("Connect")
+        print(ID)
+        print(peripherals[ID])
     }
     
     func disconnect(){

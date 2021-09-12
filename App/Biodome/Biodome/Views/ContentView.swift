@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-let bleManager = BLEManager()
 
 struct ContentView: View {
+    @EnvironmentObject var bleManager: BLEManager
     var Name: String
+    var ID: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -71,9 +72,9 @@ struct ContentView: View {
                 }
             }
             
-            // Scanning Buttons
+            // Connection Buttons
             HStack {
-                Button(action: {bleManager.connect()})
+                Button(action: {bleManager.connect(ID: ID)})
                     {Text("Connect")
                 }
 
@@ -91,6 +92,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(Name: "Some Name")
+        ContentView(Name: "Some Name", ID: 0)
     }
 }
