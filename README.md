@@ -23,3 +23,19 @@ Sensor suite and webpage interface for monitoring plants around the house. Inspi
 - RPi 40 pin cable: https://www.digikey.ca/en/products/detail/adafruit-industries-llc/1988/7241480
 - 5V supply (barallel plug - center postive - double check polarity)
 - Servo connectors???
+
+## Resources
+Core Bluetooth
+- https://www.raywenderlich.com/231-core-bluetooth-tutorial-for-ios-heart-rate-monitor#toc-anchor-009
+- https://www.novelbits.io/intro-ble-mobile-development-ios-part-2/
+- https://learn.adafruit.com/build-a-bluetooth-app-using-swift-5/code
+- https://punchthrough.com/core-bluetooth-basics/
+
+Style and UI:
+- https://betterprogramming.pub/flat-design-list-swiftui-part-i-ab9e841720cd
+- https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation
+- https://betterprogramming.pub/creating-an-apple-like-splash-screen-in-swiftui-fdeb36b47e81
+
+Other:
+- https://www.raywenderlich.com/2164-arduino-tutorial-integrating-bluetooth-le-and-ios-with-swift#toc-anchor-009
+
