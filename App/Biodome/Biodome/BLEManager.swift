@@ -21,14 +21,13 @@ struct Peripheral: Identifiable {
 
 
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
-
-    let soilMoisture = 67
-    let sunIntensity = 1000
-    let temperature = 24
-    
     var centralManager: CBCentralManager!
     var selectedPeripheral: CBPeripheral!
 
+    @Published var temperature = 0
+    @Published var soilMoisture = 0
+    @Published var sunIntensity = 0
+    
     @Published var isSwitchedOn = false
     @Published var peripherals = [Peripheral]()
     
@@ -40,7 +39,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     }
 
     func onHeartRateReceived(_ heartRate: Int) {
-      print("BPM: \(heartRate)")
+        print("BPM: \(heartRate)")
+        temperature = heartRate / 3
+        soilMoisture = heartRate / 2
+        sunIntensity = heartRate * 8
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -128,7 +130,6 @@ extension BLEManager: CBPeripheralDelegate{
       switch characteristic.uuid {
       case bodySensorLocationCharacteristicCBUUID:
         let bodySensorLocation = bodyLocation(from: characteristic)
-        print("Here")
         print(bodySensorLocation)
       case heartRateMeasurementCharacteristicCBUUID:
         let bpm = heartRate(from: characteristic)
