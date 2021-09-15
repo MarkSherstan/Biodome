@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Put Name variable somehwere ??? Figure out name and UUID stuff some more
 
 struct ContentView: View {
     @EnvironmentObject var bleManager: BLEManager
@@ -18,58 +19,20 @@ struct ContentView: View {
             Text("Biodome")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .foregroundColor(Color.purple)
-            Text(Name)
+                .foregroundColor(Color.green)
+            Text("Connected / Not Connected")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
             Divider()
             
+            // Sensor Entries
             List{
-                HStack(){
-                    Image(systemName: "drop")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    
-                    VStack(alignment: .leading){
-                        Text("Soil Moisture")
-                            .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.bold)
-                        Text("\(bleManager.soilMoisture) %")
-                            .font(.body)
-                    }
-                }
+                SensorEntry(title: "Soil Moisture", subTitle: "\(bleManager.soilMoisture) %", imageName: "drop")
                 
-                HStack(){
-                    Image(systemName: "sun.max")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    
-                    VStack(alignment: .leading){
-                        Text("Light")
-                            .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.bold)
-                        Text("\(bleManager.sunIntensity) lux")
-                            .font(.body)
-                    }
-                }
-        
-                HStack(){
-                    Image(systemName: "thermometer")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    
-                    VStack(alignment: .leading){
-                        Text("Temperature")
-                            .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.bold)
-                        Text("\(bleManager.temperature) °C")
-                            .font(.body)
-                    }
-                }
+                SensorEntry(title: "Light", subTitle: "\(bleManager.sunIntensity) lux", imageName: "sun.max")
+                
+                SensorEntry(title: "Temperature", subTitle: "\(bleManager.temperature) °C", imageName: "thermometer")
             }
             
             // Connection Buttons
@@ -84,14 +47,41 @@ struct ContentView: View {
                     Text("Disconnect")
                 }
             }.padding()
-            
         }
         .padding()
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(Name: "Some Name", ID: 0)
+    }
+}
+
+
+struct SensorEntry: View {
+    var title: String = "title"
+    var subTitle: String = "subTitle"
+    var imageName: String = "car"
+
+    var body: some View {
+        HStack() {
+            Image(systemName: imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .padding(.trailing)
+
+            VStack(alignment: .leading) {
+                Text(title)
+                .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
+                
+                Text(subTitle)
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            }
+        }.padding()
     }
 }
