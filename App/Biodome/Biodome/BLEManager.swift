@@ -8,6 +8,9 @@
 import Foundation
 import CoreBluetooth
 
+//let kBLEService_UUID = "UUID: B639F99A-074C-BDB2-24B3-FBAE385157A7"
+//let heartRateServiceCBUUID = CBUUID(string: kBLEService_UUID)
+
 let heartRateServiceCBUUID = CBUUID(string: "0x180D")
 let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
 let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
@@ -28,6 +31,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     @Published var soilMoisture = 0
     @Published var sunIntensity = 0
     
+    @Published var connectionState = "Disconnected"
     @Published var isSwitchedOn = false
     @Published var peripherals = [Peripheral]()
     
@@ -68,15 +72,18 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
+        connectionState = "Connected"
         selectedPeripheral.discoverServices([heartRateServiceCBUUID])
     }
        
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
         print("Disconnected!")
+        connectionState = "Disconnected"
     }
     
     func connect(ID: Int){
         print("Connect peripheral")
+        connectionState = "Connecting"
         selectedPeripheral = peripherals[ID].perph
         selectedPeripheral.delegate = self
         centralManager.connect(selectedPeripheral)
@@ -84,6 +91,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func disconnect(){
         print("Disconnect peripheral")
+        connectionState = "Disconnecting"
         centralManager.cancelPeripheralConnection(selectedPeripheral)
     }
     

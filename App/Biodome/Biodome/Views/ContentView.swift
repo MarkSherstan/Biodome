@@ -20,7 +20,7 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(Color.green)
-            Text("Connected / Not Connected")
+            Text(bleManager.connectionState)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
