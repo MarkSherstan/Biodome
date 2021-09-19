@@ -55,7 +55,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(Name: "Some Name", ID: 0)
+        ContentView(Name: "Some Name", ID: 0).environmentObject(BLEManager())
     }
 }
 
