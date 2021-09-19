@@ -39,3 +39,18 @@ Style and UI:
 Other:
 - https://www.raywenderlich.com/2164-arduino-tutorial-integrating-bluetooth-le-and-ios-with-swift#toc-anchor-009
 
+
+
+## RPi Setup
+https://github.com/Douglas6/cputemp
+
+As of BlueZ version 5.43 (currently shipped with Raspbian Stretch), some BLE aspects are still experimental. You will need to add the 'Experimental' flag to the bluetooth daemon. Do this: sudo nano /etc/systemd/system/dbus-org.bluez.service and add the '-E' flag at the end of the 'ExecStart' line. It should look like this:
+
+ExecStart=/usr/lib/bluetooth/bluetoothd -E
+
+To disable auto Battery reading
+Open the bluetooth service file /usr/lib/systemd/system/bluetooth.service, or /etc/systemd/system/bluetooth.target.wants/bluetooth.service in a text editor. You may need sudo permission to write to this file.
+Add -P battery to the end of the ExecStart line to disable the Battery feature in bluetoothd. Your ExecStart should look something like ExecStart=/usr/lib/bluetooth/bluetoothd -P battery now.
+Save the file.
+Run systemctl daemon-reload and systemctl restart bluetooth to apply the changes to the Bluetooth service
+
