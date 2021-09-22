@@ -10,6 +10,7 @@ import CoreBluetooth
 
 //let kBLEService_UUID = "UUID: B639F99A-074C-BDB2-24B3-FBAE385157A7"
 //let heartRateServiceCBUUID = CBUUID(string: kBLEService_UUID)
+// Start scanning on initialization
 
 let heartRateServiceCBUUID = CBUUID(string: "0x180D")
 let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
@@ -65,9 +66,12 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         } else {
             peripheralName = "Unknown"
         }
-       
-        let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-        peripherals.append(newPeripheral)
+        
+
+        if peripheralName.contains("Therm") {
+            let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+            peripherals.append(newPeripheral)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -97,13 +101,21 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func startScanning() {
          print("Start scanning")
-         // centralManager.scanForPeripherals(withServices: nil, options: nil)
-         centralManager.scanForPeripherals(withServices: [heartRateServiceCBUUID])
+          centralManager.scanForPeripherals(withServices: nil, options: nil)
+//         centralManager.scanForPeripherals(withServices: [heartRateServiceCBUUID])
      }
     
     func stopScanning() {
         print("Stop scanning")
         centralManager.stopScan()
+    }
+    
+    func toggleScanning(scanState: Bool) {
+        if scanState {
+            startScanning()
+        } else {
+            stopScanning()
+        }
     }
 
 }
@@ -181,4 +193,3 @@ extension BLEManager: CBPeripheralDelegate{
       }
     }
 }
-

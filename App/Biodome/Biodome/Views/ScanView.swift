@@ -6,20 +6,22 @@
 //
 
 import SwiftUI
+// Clear list whenever rescanning...
 
 struct ScanView: View {
     
     @StateObject var bleManager = BLEManager()
+    @State private var scanState = false
     
     var body: some View {
         NavigationView {
             VStack{
                 // Scanning toggle switch
-                Toggle(isOn: /*@START_MENU_TOKEN@*/.constant(true)/*@END_MENU_TOKEN@*/){
-                    Text("Scan")
-                }.padding()
-                
-                Spacer()
+                Toggle("Scan", isOn: $scanState)
+                    .onChange(of: scanState, perform: { value in
+                        self.bleManager.toggleScanning(scanState: scanState)
+                    })
+                    .padding()
                 
                 // Found Device List
                 List {
@@ -30,32 +32,11 @@ struct ScanView: View {
                     }
                 }.listStyle(GroupedListStyle())
                 
-                // Scanning Buttons
-                HStack {
-                    Button(action: {self.bleManager.startScanning()})
-                        {Text("Start Scan")
-                    }
-
-                    Spacer()
-
-                    Button(action: {self.bleManager.stopScanning()}) {
-                        Text("Stop Scanning")
-                    }
-                }.padding()
-                
-                // Status
-//                if bleManager.isSwitchedOn {
-//                    Text("Bluetooth is ON")
-//                        .foregroundColor(.green)
-//                } else {
-//                    Text("Bluetooth is OFF")
-//                        .foregroundColor(.red)
-//                }
-                
-            } .navigationBarTitle("Device Select") //, displayMode: .inline
+            }.navigationBarTitle("Device Select")
         }.environmentObject(bleManager)
     }
 }
+
 
 struct PeripheralRow: View {
     var peripheral: Peripheral
