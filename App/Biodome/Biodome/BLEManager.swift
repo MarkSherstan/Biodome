@@ -112,6 +112,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func toggleScanning(scanState: Bool) {
         if scanState {
+            peripherals = [Peripheral]()
             startScanning()
         } else {
             stopScanning()

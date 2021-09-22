@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-// Clear list whenever rescanning...
+
 
 struct ScanView: View {
     
@@ -31,9 +31,11 @@ struct ScanView: View {
                         }
                     }
                 }.listStyle(GroupedListStyle())
-                
-            }.navigationBarTitle("Device Select")
-        }.environmentObject(bleManager)
+             
+            }.navigationTitle("Device Select")
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .environmentObject(bleManager)
     }
 }
 
