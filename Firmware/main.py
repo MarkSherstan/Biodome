@@ -1,11 +1,10 @@
 import sys
-sys.path.append('/GATT-Server')
-
-from service import Application, Service, Characteristic, Descriptor
-from advertisement import Advertisement
-from gpiozero import CPUTemperature
+sys.path.append('GATT-Server')
 
 import dbus
+from advertisement import Advertisement
+from service import Application, Service, Characteristic, Descriptor
+from gpiozero import CPUTemperature
 
 GATT_CHRC_IFACE = "org.bluez.GattCharacteristic1"
 NOTIFY_TIMEOUT = 5000
