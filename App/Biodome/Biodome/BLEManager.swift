@@ -8,10 +8,7 @@
 import Foundation
 import CoreBluetooth
 
-//let heartRateServiceCBUUID = CBUUID(string: "0x180D")
-let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
-let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
-let cpuTempCBUUID = CBUUID(string: "00000002-710E-4A5B-8D75-3E5B444BC3CF")
+let temperatureCBUUID = CBUUID(string: "00000002-710E-4A5B-8D75-3E5B444BC3CF")
 
 struct Peripheral: Identifiable {
     let id: Int
@@ -19,7 +16,6 @@ struct Peripheral: Identifiable {
     let rssi: Int
     let perph: CBPeripheral
 }
-
 
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     var centralManager: CBCentralManager!
@@ -92,7 +88,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     func startScanning() {
          print("Start scanning")
           centralManager.scanForPeripherals(withServices: nil, options: nil)
-//         centralManager.scanForPeripherals(withServices: [heartRateServiceCBUUID])
+          // centralManager.scanForPeripherals(withServices: [heartRateServiceCBUUID])
      }
     
     func stopScanning() {
@@ -108,7 +104,6 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
             stopScanning()
         }
     }
-
 }
 
 extension BLEManager: CBPeripheralDelegate{
@@ -138,35 +133,15 @@ extension BLEManager: CBPeripheralDelegate{
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-      switch characteristic.uuid {
-      case bodySensorLocationCharacteristicCBUUID:
-        let bodySensorLocation = bodyLocation(from: characteristic)
-        print(bodySensorLocation)
-      case cpuTempCBUUID:
-          temperature = readTemperature(from: characteristic)
-      default:
-        print("Unhandled Characteristic UUID: \(characteristic.uuid)")
-      }
+        switch characteristic.uuid {
+            case temperatureCBUUID:
+                temperature = getSensorValue(from: characteristic)
+            default:
+                print("Unhandled Characteristic UUID: \(characteristic.uuid)")
+        }
     }
 
-    private func bodyLocation(from characteristic: CBCharacteristic) -> String {
-      guard let characteristicData = characteristic.value,
-        let byte = characteristicData.first else { return "Error" }
-
-      switch byte {
-      case 0: return "Other"
-      case 1: return "Chest"
-      case 2: return "Wrist"
-      case 3: return "Finger"
-      case 4: return "Hand"
-      case 5: return "Ear Lobe"
-      case 6: return "Foot"
-      default:
-        return "Reserved for future use"
-      }
-    }
-
-    private func readTemperature(from characteristic: CBCharacteristic) -> Float {
+    private func getSensorValue(from characteristic: CBCharacteristic) -> Float {
         guard let characteristicData = characteristic.value else { return -1 }
         let byteArray = [UInt8](characteristicData)
         
