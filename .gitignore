@@ -1,6 +1,9 @@
 # MacOS
 .DS_Store
 
+# Python cache files
+*.pyc
+
 # For PCBs designed using KiCad: http://www.kicad-pcb.org/
 # Format documentation: http://kicad-pcb.org/help/file-formats/
 
