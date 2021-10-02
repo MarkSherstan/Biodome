@@ -12,7 +12,7 @@ NOTIFY_TIMEOUT = 5000
 class ThermometerAdvertisement(Advertisement):
     def __init__(self, index):
         Advertisement.__init__(self, index, "peripheral")
-        self.add_local_name("Thermometer")
+        self.add_local_name("Biodome")
         self.include_tx_power = True
 
 class ThermometerService(Service):
@@ -44,17 +44,13 @@ class TempCharacteristic(Characteristic):
 
     def get_temperature(self):
         value = []
-        unit = "C"
 
         cpu = CPUTemperature()
-        temp = cpu.temperature
-        if self.service.is_farenheit():
-            temp = (temp * 1.8) + 32
-            unit = "F"
+        temp = int(round(cpu.temperature, 1) * 10)
+        byteArray = temp.to_bytes(2, byteorder='big', signed=True)
 
-        strtemp = str(round(temp, 1)) + " " + unit
-        for c in strtemp:
-            value.append(dbus.Byte(c.encode()))
+        for b in byteArray:
+            value.append(dbus.Byte(b))
 
         return value
 
