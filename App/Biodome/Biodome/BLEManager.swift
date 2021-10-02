@@ -8,13 +8,10 @@
 import Foundation
 import CoreBluetooth
 
-//let kBLEService_UUID = "UUID: B639F99A-074C-BDB2-24B3-FBAE385157A7"
-//let heartRateServiceCBUUID = CBUUID(string: kBLEService_UUID)
-// Start scanning on initialization
-
-let heartRateServiceCBUUID = CBUUID(string: "0x180D")
+//let heartRateServiceCBUUID = CBUUID(string: "0x180D")
 let heartRateMeasurementCharacteristicCBUUID = CBUUID(string: "2A37")
 let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
+let cpuTempCBUUID = CBUUID(string: "00000002-710E-4A5B-8D75-3E5B444BC3CF")
 
 struct Peripheral: Identifiable {
     let id: Int
@@ -28,9 +25,9 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     var centralManager: CBCentralManager!
     var selectedPeripheral: CBPeripheral!
 
-    @Published var temperature = 0
-    @Published var soilMoisture = 0
-    @Published var sunIntensity = 0
+    @Published var temperature: Float = 0
+    @Published var soilMoisture: Float = 0
+    @Published var sunIntensity: Float = 0
     
     @Published var connectionState = "Disconnected"
     @Published var isSwitchedOn = false
@@ -41,13 +38,6 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
 
         centralManager = CBCentralManager(delegate: self, queue: nil)
         centralManager.delegate = self
-    }
-
-    func onHeartRateReceived(_ heartRate: Int) {
-        print("BPM: \(heartRate)")
-        temperature = heartRate / 3
-        soilMoisture = heartRate / 2
-        sunIntensity = heartRate * 8
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -68,7 +58,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         }
         
 
-        if peripheralName.contains("Therm") {
+        if peripheralName.contains("Bio") {
             let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
             peripherals.append(newPeripheral)
         }
@@ -77,7 +67,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
         connectionState = "Connected"
-        selectedPeripheral.discoverServices([heartRateServiceCBUUID])
+        selectedPeripheral.discoverServices(nil)
     }
        
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
@@ -152,9 +142,8 @@ extension BLEManager: CBPeripheralDelegate{
       case bodySensorLocationCharacteristicCBUUID:
         let bodySensorLocation = bodyLocation(from: characteristic)
         print(bodySensorLocation)
-      case heartRateMeasurementCharacteristicCBUUID:
-        let bpm = heartRate(from: characteristic)
-        onHeartRateReceived(bpm)
+      case cpuTempCBUUID:
+          temperature = readTemperature(from: characteristic)
       default:
         print("Unhandled Characteristic UUID: \(characteristic.uuid)")
       }
@@ -177,20 +166,10 @@ extension BLEManager: CBPeripheralDelegate{
       }
     }
 
-    private func heartRate(from characteristic: CBCharacteristic) -> Int {
-      guard let characteristicData = characteristic.value else { return -1 }
-      let byteArray = [UInt8](characteristicData)
-
-      // See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml
-      // The heart rate mesurement is in the 2nd, or in the 2nd and 3rd bytes, i.e. one one or in two bytes
-      // The first byte of the first bit specifies the length of the heart rate data, 0 == 1 byte, 1 == 2 bytes
-      let firstBitValue = byteArray[0] & 0x01
-      if firstBitValue == 0 {
-        // Heart Rate Value Format is in the 2nd byte
-        return Int(byteArray[1])
-      } else {
-        // Heart Rate Value Format is in the 2nd and 3rd bytes
-        return (Int(byteArray[1]) << 8) + Int(byteArray[2])
-      }
+    private func readTemperature(from characteristic: CBCharacteristic) -> Float {
+        guard let characteristicData = characteristic.value else { return -1 }
+        let byteArray = [UInt8](characteristicData)
+        
+        return Float(Int(byteArray[0]) << 8 + Int(byteArray[1])) / 10
     }
 }
