@@ -12,8 +12,23 @@ import SwiftUI
 // Put everything just on this screen?
 // Loading
 
+struct SheetView: View {
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        Button("Press to dismiss") {
+            dismiss()
+        }
+        .font(.title)
+        .padding()
+    }
+}
+
+
 struct ContentView: View {
     @EnvironmentObject var bleManager: BLEManager
+    @State private var sheetState = false
+    
     var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
     var Name: String
     var ID: Int
@@ -45,6 +60,18 @@ struct ContentView: View {
             HStack {
                 Button(action: {bleManager.connect(ID: ID)})
                     {Text("Connect")
+                }
+
+                Spacer()
+                
+                Button(action: {
+                    sheetState.toggle()
+                }) {
+                    Image(systemName: "magnifyingglass")
+                    Text("Discover")
+                }
+                .sheet(isPresented: $sheetState) {
+                    SheetView()
                 }
 
                 Spacer()
@@ -100,7 +127,7 @@ struct Widget: View {
                         .foregroundColor(widgetColor)
                 }.padding(.top)
                 
-                Text(String(round(value)) + " " + units)
+                Text(String(format: "%.0f %@", value, units))
                     .font(.system(size: 40))
                     .fontWeight(.bold)
                     .foregroundColor(widgetColor)
