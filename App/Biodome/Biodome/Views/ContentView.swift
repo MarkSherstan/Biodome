@@ -8,9 +8,12 @@
 import SwiftUI
 
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more
+// Timeout delay message when connecting?
+// Put everything just on this screen?
 
 struct ContentView: View {
     @EnvironmentObject var bleManager: BLEManager
+    var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
     var Name: String
     var ID: Int
     
@@ -26,14 +29,18 @@ struct ContentView: View {
             
             Divider()
             
-            // Sensor Entries
-            List{
-                SensorEntry(title: "Soil Moisture", subTitle: "\(bleManager.soilMoisture) %", imageName: "drop")
-                
-                SensorEntry(title: "Light", subTitle: "\(bleManager.sunIntensity) lux", imageName: "sun.max")
-                
-                SensorEntry(title: "Temperature", subTitle: "\(bleManager.temperature) °C", imageName: "thermometer")
-            }
+            ScrollView {
+                LazyVGrid(columns: gridItemLayout, spacing: 20){
+                    
+                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer")
+                    
+                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer")
+                    
+                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max")
+                    
+                    Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity")
+                    }
+                }
             
             // Connection Buttons
             HStack {
@@ -55,33 +62,48 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(Name: "Some Name", ID: 0).environmentObject(BLEManager())
+        Group {
+            // Dark View
+            ContentView(Name: "Some Name", ID: 0).preferredColorScheme(.dark).environmentObject(BLEManager())
+            
+            // Light View
+            ContentView(Name: "Some Name", ID: 0).preferredColorScheme(.light).environmentObject(BLEManager())
+        }
     }
 }
 
 
-struct SensorEntry: View {
-    var title: String = "title"
-    var subTitle: String = "subTitle"
-    var imageName: String = "car"
-
+struct Widget: View {
+    var title: String
+    var value: String
+    var units: String
+    var imageName: String
+    
     var body: some View {
-        HStack() {
-            Image(systemName: imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .padding(.trailing)
-
-            VStack(alignment: .leading) {
-                Text(title)
-                .font(/*@START_MENU_TOKEN@*/.title2/*@END_MENU_TOKEN@*/)
-                .fontWeight(.bold)
+        ZStack(alignment: .top){
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                .stroke(Color.secondary, lineWidth: 4)
+                .frame(width: 175, height: 175)
+                .opacity(0.3)
+            
+            VStack(){
+                HStack(){
+                    Image(systemName: imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(.secondary)
+                        
+                    Text(title)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }.padding(.top)
                 
-                Text(subTitle)
-                    .font(.body)
+                Text(value + " " + units)
+                    .font(.system(size: 40))
+                    .fontWeight(.bold)
                     .foregroundColor(.secondary)
             }
-        }.padding()
+        }
     }
 }
