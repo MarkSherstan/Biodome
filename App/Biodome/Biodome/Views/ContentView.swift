@@ -30,13 +30,13 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: 20){
                     
-                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: "purple")
+                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .red)
                     
-                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: "purple")
+                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .red)
 
-                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max", widgetColor: "orange")
+                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max", widgetColor: .yellow)
 
-                    Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity", widgetColor: "green")
+                    Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity", widgetColor: .teal)
                     }
                 }
             
@@ -76,12 +76,12 @@ struct Widget: View {
     var value: String
     var units: String
     var imageName: String
-    var widgetColor: String
+    var widgetColor: Color
     
     var body: some View {
         ZStack(alignment: .top){
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .foregroundColor(getColor(name: widgetColor))
+                .foregroundColor(widgetColor)
                 .frame(width: 175, height: 125)
             
             VStack(){
@@ -103,15 +103,5 @@ struct Widget: View {
                     .foregroundColor(.white)
             }
         }
-    }
-}
-
-private func getColor(name: String) -> Color {
-    switch name {
-    case "cyan": return Color.blue
-    case "orange": return Color.orange
-    case "purple": return Color.purple
-    case "green": return Color.green
-    default: return Color.black
     }
 }
