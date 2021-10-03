@@ -22,23 +22,21 @@ struct ContentView: View {
             Text("Biodome")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .foregroundColor(Color.green)
             Text(bleManager.connectionState)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
             
             Divider()
             
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: 20){
                     
-                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer")
+                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: "purple")
                     
-                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer")
-                    
-                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max")
-                    
-                    Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity")
+                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: "purple")
+
+                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max", widgetColor: "orange")
+
+                    Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity", widgetColor: "green")
                     }
                 }
             
@@ -78,13 +76,13 @@ struct Widget: View {
     var value: String
     var units: String
     var imageName: String
+    var widgetColor: String
     
     var body: some View {
         ZStack(alignment: .top){
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .stroke(Color.secondary, lineWidth: 4)
-                .frame(width: 175, height: 175)
-                .opacity(0.3)
+                .foregroundColor(getColor(name: widgetColor))
+                .frame(width: 175, height: 125)
             
             VStack(){
                 HStack(){
@@ -92,18 +90,28 @@ struct Widget: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 15, height: 15)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                         
                     Text(title)
                         .font(.footnote)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                 }.padding(.top)
                 
                 Text(value + " " + units)
                     .font(.system(size: 40))
                     .fontWeight(.bold)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white)
             }
         }
+    }
+}
+
+private func getColor(name: String) -> Color {
+    switch name {
+    case "cyan": return Color.blue
+    case "orange": return Color.orange
+    case "purple": return Color.purple
+    case "green": return Color.green
+    default: return Color.black
     }
 }
