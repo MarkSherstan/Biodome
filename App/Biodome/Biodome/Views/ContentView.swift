@@ -30,11 +30,11 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: 20){
                     
-                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .red)
+                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .green)
                     
-                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .red)
+                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .green)
 
-                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max", widgetColor: .yellow)
+                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max", widgetColor: .orange)
 
                     Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity", widgetColor: .teal)
                     }
