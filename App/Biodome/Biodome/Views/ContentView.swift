@@ -10,6 +10,7 @@ import SwiftUI
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more
 // Timeout delay message when connecting?
 // Put everything just on this screen?
+// Loading
 
 struct ContentView: View {
     @EnvironmentObject var bleManager: BLEManager
@@ -30,13 +31,13 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: 20){
                     
-                    Widget(title: "TEMPERATURE A", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .green)
+                    Widget(title: "TEMPERATURE A", value: bleManager.temperature, units: "°C", imageName: "thermometer", widgetColor: .green)
                     
-                    Widget(title: "TEMPERATURE B", value: String(bleManager.temperature), units: "°C", imageName: "thermometer", widgetColor: .green)
+                    Widget(title: "TEMPERATURE B", value: bleManager.temperature, units: "°C", imageName: "thermometer", widgetColor: .green)
 
-                    Widget(title: "LIGHT", value: String(bleManager.temperature), units: "lux", imageName: "sun.max", widgetColor: .orange)
+                    Widget(title: "LIGHT", value: bleManager.sunIntensity, units: "lux", imageName: "sun.max", widgetColor: .orange)
 
-                    Widget(title: "MOISTURE", value: String(bleManager.temperature), units: "%", imageName: "humidity", widgetColor: .teal)
+                    Widget(title: "MOISTURE", value: bleManager.soilMoisture, units: "%", imageName: "humidity", widgetColor: .teal)
                     }
                 }
             
@@ -73,7 +74,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct Widget: View {
     var title: String
-    var value: String
+    var value: Float
     var units: String
     var imageName: String
     var widgetColor: Color
@@ -81,7 +82,9 @@ struct Widget: View {
     var body: some View {
         ZStack(alignment: .top){
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .foregroundColor(widgetColor)
+                .strokeBorder(widgetColor, lineWidth: 3)
+                .background( RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(widgetColor))
+                .opacity(0.3)
                 .frame(width: 175, height: 125)
             
             VStack(){
@@ -90,17 +93,17 @@ struct Widget: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 15, height: 15)
-                        .foregroundColor(.white)
+                        .foregroundColor(widgetColor)
                         
                     Text(title)
                         .font(.footnote)
-                        .foregroundColor(.white)
+                        .foregroundColor(widgetColor)
                 }.padding(.top)
                 
-                Text(value + " " + units)
+                Text(String(round(value)) + " " + units)
                     .font(.system(size: 40))
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(widgetColor)
             }
         }
     }
