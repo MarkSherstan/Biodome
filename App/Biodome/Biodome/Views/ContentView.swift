@@ -14,9 +14,22 @@ import SwiftUI
 
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
-
+    @EnvironmentObject var bleManager: BLEManager
+    
     var body: some View {
-        Text("Hello World")
+        HStack {
+            Button(action: {bleManager.connect(ID: 1)})
+                {Text("Connect")
+            }
+
+            Spacer()
+            
+            Button(action: {bleManager.disconnect()}) {
+                Text("Disconnect")
+            }
+        }.padding()
+        
+        Spacer()
     }
 }
 
@@ -39,6 +52,7 @@ struct ContentView: View {
             
             Divider()
             
+            // Sensor values
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: 20){
                     
@@ -52,14 +66,11 @@ struct ContentView: View {
                     }
                 }
             
-            // Connection Buttons
-            HStack {
-                Button(action: {bleManager.connect(ID: ID)})
-                    {Text("Connect")
-                }
-
+            // Discover button
+            HStack(){
                 Spacer()
                 
+                // Connection Buttons
                 Button(action: {
                     sheetState.toggle()
                 }) {
@@ -69,13 +80,10 @@ struct ContentView: View {
                 .sheet(isPresented: $sheetState) {
                     SheetView()
                 }
-
+                
                 Spacer()
+            }
 
-                Button(action: {bleManager.disconnect()}) {
-                    Text("Disconnect")
-                }
-            }.padding()
         }
         .padding()
     }
