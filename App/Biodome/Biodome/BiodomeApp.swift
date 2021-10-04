@@ -11,7 +11,8 @@ import SwiftUI
 struct BiodomeApp: App {
     var body: some Scene {
         WindowGroup {
-            ScanView()
+//            ScanView()
+            ContentView(Name: "Some Name", ID: 0).environmentObject(BLEManager())
         }
     }
 }

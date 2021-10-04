@@ -16,11 +16,7 @@ struct SheetView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        Button("Press to dismiss") {
-            dismiss()
-        }
-        .font(.title)
-        .padding()
+        Text("Hello World")
     }
 }
 
@@ -50,7 +46,7 @@ struct ContentView: View {
                     
                     Widget(title: "TEMPERATURE B", value: bleManager.temperature, units: "°C", imageName: "thermometer", widgetColor: .green)
 
-                    Widget(title: "LIGHT", value: bleManager.sunIntensity, units: "lux", imageName: "sun.max", widgetColor: .orange)
+                    Widget(title: "LIGHT", value: bleManager.sunIntensity, units: " lux", imageName: "sun.max", widgetColor: .orange)
 
                     Widget(title: "MOISTURE", value: bleManager.soilMoisture, units: "%", imageName: "humidity", widgetColor: .teal)
                     }
@@ -112,9 +108,9 @@ struct Widget: View {
                 .strokeBorder(widgetColor, lineWidth: 3)
                 .background( RoundedRectangle(cornerRadius: 25, style: .continuous).foregroundColor(widgetColor))
                 .opacity(0.3)
-                .frame(width: 175, height: 125)
+                .frame(width: 150, height: 100)
             
-            VStack(){
+            VStack(spacing: 10){
                 HStack(){
                     Image(systemName: imageName)
                         .resizable()
@@ -127,7 +123,7 @@ struct Widget: View {
                         .foregroundColor(widgetColor)
                 }.padding(.top)
                 
-                Text(String(format: "%.0f %@", value, units))
+                Text(String(format: "%.0f%@", value, units))
                     .font(.system(size: 40))
                     .fontWeight(.bold)
                     .foregroundColor(widgetColor)
