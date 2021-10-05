@@ -12,7 +12,7 @@ struct BiodomeApp: App {
     var body: some Scene {
         WindowGroup {
 //            ScanView()
-            ContentView(Name: "Some Name", ID: 0).environmentObject(BLEManager())
+            ContentView()
         }
     }
 }

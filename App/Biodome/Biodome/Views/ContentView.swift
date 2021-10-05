@@ -8,39 +8,66 @@
 import SwiftUI
 
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more
-// Timeout delay message when connecting?
 // Put everything just on this screen?
 // Loading
+
+struct PeripheralRow: View {
+    var peripheral: Peripheral
+    
+    var body: some View {
+        HStack {
+            Text(peripheral.name)
+            Spacer()
+            Text(String(peripheral.rssi))
+        }
+    }
+}
+
 
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var bleManager: BLEManager
     
     var body: some View {
+        
+        List {
+            Section(header: Text("Connected Device")){
+                HStack {
+                    Text("Test")
+                    Spacer()
+                    Text("Not Connected").foregroundColor(.secondary)
+                }
+            }
+            
+            Section(header: Text("Devices")) {
+                ForEach(bleManager.peripherals) { peripheral in
+                    PeripheralRow(peripheral: peripheral)
+                }
+            }
+        }.listStyle(InsetGroupedListStyle())
+            
+        Spacer()
+        
         HStack {
             Button(action: {bleManager.connect(ID: 1)})
                 {Text("Connect")
             }
-
+            
             Spacer()
             
             Button(action: {bleManager.disconnect()}) {
                 Text("Disconnect")
             }
         }.padding()
-        
-        Spacer()
     }
 }
 
 
 struct ContentView: View {
-    @EnvironmentObject var bleManager: BLEManager
+    @StateObject var bleManager = BLEManager()
     @State private var sheetState = false
     
     var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
-    var Name: String
-    var ID: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -70,21 +97,23 @@ struct ContentView: View {
             HStack(){
                 Spacer()
                 
-                // Connection Buttons
                 Button(action: {
                     sheetState.toggle()
+                    self.bleManager.toggleScanning(scanState: true)
                 }) {
                     Image(systemName: "magnifyingglass")
                     Text("Discover")
                 }
-                .sheet(isPresented: $sheetState) {
-                    SheetView()
-                }
+                .sheet(isPresented: $sheetState,
+                       onDismiss: {self.bleManager.toggleScanning(scanState: false)},
+                       content:{SheetView()
+                })
                 
                 Spacer()
             }
 
         }
+        .environmentObject(bleManager)
         .padding()
     }
 }
@@ -94,10 +123,10 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             // Dark View
-            ContentView(Name: "Some Name", ID: 0).preferredColorScheme(.dark).environmentObject(BLEManager())
+            ContentView().preferredColorScheme(.dark)
             
             // Light View
-            ContentView(Name: "Some Name", ID: 0).preferredColorScheme(.light).environmentObject(BLEManager())
+            ContentView().preferredColorScheme(.light)
         }
     }
 }

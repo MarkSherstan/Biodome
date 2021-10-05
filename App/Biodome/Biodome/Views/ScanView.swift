@@ -14,45 +14,47 @@ struct ScanView: View {
     @State private var scanState = false
     
     var body: some View {
-        NavigationView {
-            VStack{
-                // Scanning toggle switch
-                Toggle("Scan", isOn: $scanState)
-                    .onChange(of: scanState, perform: { value in
-                        self.bleManager.toggleScanning(scanState: scanState)
-                    })
-                    .padding()
-                
-                // Found Device List
-                List {
-                    Section(header: Text("Devices")) {
-                        ForEach(bleManager.peripherals) { peripheral in
-                            PeripheralRow(peripheral: peripheral)
-                        }
-                    }
-                }.listStyle(GroupedListStyle())
-             
-            }.navigationTitle("Device Select")
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .environmentObject(bleManager)
+        Text("hello")
+//        NavigationView {
+//            VStack{
+//                // Scanning toggle switch
+//                Toggle("Scan", isOn: $scanState)
+//                    .onChange(of: scanState, perform: { value in
+//                        self.bleManager.toggleScanning(scanState: scanState)
+//                    })
+//                    .padding()
+//
+//                // Found Device List
+//                List {
+//                    Section(header: Text("Devices")) {
+//                        ForEach(bleManager.peripherals) { peripheral in
+//                            PeripheralRow(peripheral: peripheral)
+//                        }
+//                    }
+//                }.listStyle(GroupedListStyle())
+//
+//            }.navigationTitle("Device Select")
+//        }
+//        .navigationViewStyle(StackNavigationViewStyle())
+//        .environmentObject(bleManager)
     }
 }
 
 
-struct PeripheralRow: View {
-    var peripheral: Peripheral
-    
-    var body: some View {
-        NavigationLink(destination: ContentView(Name: peripheral.name, ID: peripheral.id)){
-            HStack {
-                Text(peripheral.name)
-                Spacer()
-                Text(String(peripheral.rssi))
-            }
-        }
-    }
-}
+//struct PeripheralRow: View {
+//    var peripheral: Peripheral
+//    
+//    var body: some View {
+////        NavigationLink(destination: ContentView(Name: peripheral.name, ID: peripheral.id)){
+////            HStack {
+////                Text(peripheral.name)
+////                Spacer()
+////                Text(String(peripheral.rssi))
+////            }
+////        }
+//        Text("World")
+//    }
+//}
 
 
 struct ScanView_Previews: PreviewProvider {
