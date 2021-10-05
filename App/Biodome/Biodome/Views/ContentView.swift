@@ -8,8 +8,6 @@
 import SwiftUI
 
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more
-// Put everything just on this screen?
-// Loading
 
 struct PeripheralRow: View {
     var peripheral: Peripheral
@@ -39,7 +37,11 @@ struct SheetView: View {
                 }
             }
             
-            Section(header: Text("Devices")) {
+            Section(header:
+                HStack{
+                    Text("Devices  ")
+                    ProgressView()
+                }) {
                 ForEach(bleManager.peripherals) { peripheral in
                     PeripheralRow(peripheral: peripheral)
                 }
