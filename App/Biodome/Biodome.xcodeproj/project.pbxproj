@@ -12,7 +12,7 @@
 		1D26AD0B26EC50890026378F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D26AD0A26EC50890026378F /* Assets.xcassets */; };
 		1D26AD0E26EC50890026378F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D26AD0D26EC50890026378F /* Preview Assets.xcassets */; };
 		1DB97C8A26EDCBCB006805A5 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB97C8926EDCBCB006805A5 /* BLEManager.swift */; };
-		1DB97C8C26EDD8C6006805A5 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB97C8B26EDD8C6006805A5 /* ScanView.swift */; };
+		1DFF3AC3270E6D820060DCF1 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFF3AC2270E6D820060DCF1 /* SheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		1D26AD0D26EC50890026378F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1D26AD0F26EC50890026378F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1DB97C8926EDCBCB006805A5 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
-		1DB97C8B26EDD8C6006805A5 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
+		1DFF3AC2270E6D820060DCF1 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				1D26AD0826EC50880026378F /* ContentView.swift */,
-				1DB97C8B26EDD8C6006805A5 /* ScanView.swift */,
+				1DFF3AC2270E6D820060DCF1 /* SheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -153,7 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DB97C8A26EDCBCB006805A5 /* BLEManager.swift in Sources */,
-				1DB97C8C26EDD8C6006805A5 /* ScanView.swift in Sources */,
+				1DFF3AC3270E6D820060DCF1 /* SheetView.swift in Sources */,
 				1D26AD0926EC50880026378F /* ContentView.swift in Sources */,
 				1D26AD0726EC50880026378F /* BiodomeApp.swift in Sources */,
 			);

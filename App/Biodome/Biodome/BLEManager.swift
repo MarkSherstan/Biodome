@@ -105,7 +105,6 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func disconnect(){
         print("Disconnecting")
-        connectionState = "Disconnecting"
         centralManager.cancelPeripheralConnection(selectedPeripheral)
     }
     
