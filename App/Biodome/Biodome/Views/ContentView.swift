@@ -10,6 +10,9 @@ import SwiftUI
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more -> add info tab
 // Connection timeout / error message?
 // Split this into 2 files?
+// If removed from list is peripheral refound?
+// Add progress wheel on connected device while connecting
+// Conencting / disconnecting logic messages might be a little out of sync
 
 struct SelectedRow: View {
     @EnvironmentObject var bleManager: BLEManager
@@ -19,7 +22,7 @@ struct SelectedRow: View {
         HStack {
             Text(peripheral.name)
             Spacer()
-            Text(bleManager.connectionState)
+            Text(bleManager.connectionState).foregroundColor(.secondary)
         }
     }
 }
@@ -27,7 +30,6 @@ struct SelectedRow: View {
 
 struct PeripheralRow: View {
     @EnvironmentObject var bleManager: BLEManager
-    @State var buttonState = false
     var peripheral: Peripheral
     
     var body: some View {
@@ -35,13 +37,8 @@ struct PeripheralRow: View {
             Text(peripheral.name)
             Spacer()
             Button(action: {
-                buttonState = true
                 bleManager.connect(selected: peripheral)
-                
-            }){if buttonState == true{
-                ProgressView()
-                }
-            }
+            }){}
         }
     }
 }

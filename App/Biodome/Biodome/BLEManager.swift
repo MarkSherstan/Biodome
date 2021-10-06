@@ -69,34 +69,33 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         connectionState = "Failed"
     }
     
-    
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Connected!")
+        print("Connected")
         connectionState = "Connected"
         selectedPeripheral.discoverServices(nil)
-        
-        // Add to connection list
-        connectionSelect.insert(selectedDevice, at: 0)
-
-        if connectionSelect.count > 1 {
-            connectionSelect.removeLast()
-        }
-        
-        // Remove from search list
-        if let idx = peripherals.firstIndex(where: { $0.id == selectedDevice.id }) {
-            peripherals.remove(at: idx)
-            print(idx)
-        }
-        
     }
        
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
-        print("Disconnected!")
+        print("Disconnected")
         connectionState = "Disconnected"
     }
     
     func connect(selected: Peripheral){
-        print("Connect peripheral")
+        // Add to connection list
+        connectionSelect.insert(selected, at: 0)
+
+        if connectionSelect.count > 1 {
+            disconnect()
+            connectionSelect.removeLast()
+        }
+        
+        // Remove from search list
+        if let idx = peripherals.firstIndex(where: { $0.id == selected.id }) {
+            peripherals.remove(at: idx)
+        }
+        
+        // Actually connect
+        print("Connecting")
         connectionState = "Connecting"
         selectedDevice = selected
         selectedPeripheral = selected.perph
@@ -105,7 +104,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     }
     
     func disconnect(){
-        print("Disconnect peripheral")
+        print("Disconnecting")
         connectionState = "Disconnecting"
         centralManager.cancelPeripheralConnection(selectedPeripheral)
     }
@@ -113,7 +112,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     func startScanning() {
          print("Start scanning")
           centralManager.scanForPeripherals(withServices: nil, options: nil)
-          // centralManager.scanForPeripherals(withServices: [heartRateServiceCBUUID])
+          // centralManager.scanForPeripherals(withServices: [someCBUUID])
      }
     
     func stopScanning() {
@@ -135,7 +134,7 @@ extension BLEManager: CBPeripheralDelegate{
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
       guard let services = peripheral.services else { return }
       for service in services {
-        print(service)
+//        print(service)
         peripheral.discoverCharacteristics(nil, for: service)
       }
     }
@@ -144,14 +143,14 @@ extension BLEManager: CBPeripheralDelegate{
       guard let characteristics = service.characteristics else { return }
 
       for characteristic in characteristics {
-        print(characteristic)
+//        print(characteristic)
 
         if characteristic.properties.contains(.read) {
-          print("\(characteristic.uuid): properties contains .read")
+//          print("\(characteristic.uuid): properties contains .read")
           peripheral.readValue(for: characteristic)
         }
         if characteristic.properties.contains(.notify) {
-          print("\(characteristic.uuid): properties contains .notify")
+//          print("\(characteristic.uuid): properties contains .notify")
           peripheral.setNotifyValue(true, for: characteristic)
         }
       }
@@ -162,7 +161,8 @@ extension BLEManager: CBPeripheralDelegate{
             case temperatureCBUUID:
                 temperature = getSensorValue(from: characteristic)
             default:
-                print("Unhandled Characteristic UUID: \(characteristic.uuid)")
+                break
+//                print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }
     }
 
