@@ -9,6 +9,9 @@ import SwiftUI
 
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more
 
+// Remove item from array
+// Fix the ID's -> Maybe Use the UUID thing
+// https://learnappmaking.com/random-unique-identifier-uuid-swift-how-to/
 
 struct SelectedRow: View {
     @EnvironmentObject var bleManager: BLEManager
@@ -26,23 +29,25 @@ struct SelectedRow: View {
 
 struct PeripheralRow: View {
     @EnvironmentObject var bleManager: BLEManager
+    @State var buttonState = false
     var peripheral: Peripheral
     
     var body: some View {
         HStack {
             Text(peripheral.name)
+            Spacer()
             Button(action: {
-                bleManager.connectionSelect.insert(peripheral, at: 0)
+                buttonState = true
                 
-                // Remove item from array
-                // Fix the ID's -> Maybe Use the UUID thing
-                // https://learnappmaking.com/random-unique-identifier-uuid-swift-how-to/
+                bleManager.connectionSelect.insert(peripheral, at: 0)
                 
                 if bleManager.connectionSelect.count > 1 {
                     bleManager.connectionSelect.removeLast()
                 }
-
-            }){}
+            }){if buttonState == true{
+                ProgressView()
+                }
+            }
         }
     }
 }
