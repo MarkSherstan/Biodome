@@ -11,7 +11,7 @@ import CoreBluetooth
 let temperatureCBUUID = CBUUID(string: "00000002-710E-4A5B-8D75-3E5B444BC3CF")
 
 struct Peripheral: Identifiable {
-    let id: Int
+    let id = UUID()
     let name: String
     let rssi: Int
     let perph: CBPeripheral
@@ -20,6 +20,7 @@ struct Peripheral: Identifiable {
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     var centralManager: CBCentralManager!
     var selectedPeripheral: CBPeripheral!
+    var selectedDevice: Peripheral!
 
     @Published var temperature: Float = 0
     @Published var soilMoisture: Float = 0
@@ -54,7 +55,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
             peripheralName = "Unknown"
         }
         
-        let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
         peripherals.append(newPeripheral)
         
 //        if peripheralName.contains("Bio") {
@@ -63,10 +64,30 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
 //        }
     }
     
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("Failed to Connect!")
+        connectionState = "Failed"
+    }
+    
+    
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected!")
         connectionState = "Connected"
         selectedPeripheral.discoverServices(nil)
+        
+        // Add to connection list
+        connectionSelect.insert(selectedDevice, at: 0)
+
+        if connectionSelect.count > 1 {
+            connectionSelect.removeLast()
+        }
+        
+        // Remove from search list
+        if let idx = peripherals.firstIndex(where: { $0.id == selectedDevice.id }) {
+            peripherals.remove(at: idx)
+            print(idx)
+        }
+        
     }
        
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
@@ -74,10 +95,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
         connectionState = "Disconnected"
     }
     
-    func connect(ID: Int){
+    func connect(selected: Peripheral){
         print("Connect peripheral")
         connectionState = "Connecting"
-        selectedPeripheral = peripherals[ID].perph
+        selectedDevice = selected
+        selectedPeripheral = selected.perph
         selectedPeripheral.delegate = self
         centralManager.connect(selectedPeripheral)
     }
