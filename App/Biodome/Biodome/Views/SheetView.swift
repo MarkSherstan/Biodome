@@ -66,6 +66,10 @@ struct SheetView: View {
 
 struct SheetView_Previews: PreviewProvider {
     static var previews: some View {
-        SheetView()
+        // Dark
+        SheetView().preferredColorScheme(.dark).environmentObject(BLEManager())
+        
+        // Light
+        SheetView().preferredColorScheme(.light).environmentObject(BLEManager())
     }
 }
