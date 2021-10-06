@@ -9,14 +9,40 @@ import SwiftUI
 
 // Put Name variable somehwere ??? Figure out name and UUID stuff some more
 
-struct PeripheralRow: View {
+
+struct SelectedRow: View {
+    @EnvironmentObject var bleManager: BLEManager
     var peripheral: Peripheral
     
     var body: some View {
         HStack {
             Text(peripheral.name)
             Spacer()
-            Text(String(peripheral.rssi))
+            Text(bleManager.connectionState)
+        }
+    }
+}
+
+
+struct PeripheralRow: View {
+    @EnvironmentObject var bleManager: BLEManager
+    var peripheral: Peripheral
+    
+    var body: some View {
+        HStack {
+            Text(peripheral.name)
+            Button(action: {
+                bleManager.connectionSelect.insert(peripheral, at: 0)
+                
+                // Remove item from array
+                // Fix the ID's -> Maybe Use the UUID thing
+                // https://learnappmaking.com/random-unique-identifier-uuid-swift-how-to/
+                
+                if bleManager.connectionSelect.count > 1 {
+                    bleManager.connectionSelect.removeLast()
+                }
+
+            }){}
         }
     }
 }
@@ -30,10 +56,8 @@ struct SheetView: View {
         
         List {
             Section(header: Text("Connected Device")){
-                HStack {
-                    Text("Test")
-                    Spacer()
-                    Text("Not Connected").foregroundColor(.secondary)
+                ForEach(bleManager.connectionSelect) { peripheral in
+                    SelectedRow(peripheral: peripheral)
                 }
             }
             
@@ -48,19 +72,19 @@ struct SheetView: View {
             }
         }.listStyle(InsetGroupedListStyle())
             
-        Spacer()
+//        Spacer()
         
-        HStack {
-            Button(action: {bleManager.connect(ID: 1)})
-                {Text("Connect")
-            }
-            
-            Spacer()
-            
-            Button(action: {bleManager.disconnect()}) {
-                Text("Disconnect")
-            }
-        }.padding()
+//        HStack {
+//            Button(action: {bleManager.connect(ID: 1)})
+//                {Text("Connect")
+//            }
+//
+//            Spacer()
+//
+//            Button(action: {bleManager.disconnect()}) {
+//                Text("Disconnect")
+//            }
+//        }.padding()
     }
 }
 

@@ -43,15 +43,15 @@ struct ScanView: View {
 
 //struct PeripheralRow: View {
 //    var peripheral: Peripheral
-//    
+//
 //    var body: some View {
-////        NavigationLink(destination: ContentView(Name: peripheral.name, ID: peripheral.id)){
-////            HStack {
-////                Text(peripheral.name)
-////                Spacer()
-////                Text(String(peripheral.rssi))
-////            }
-////        }
+//        NavigationLink(destination: ContentView(Name: peripheral.name, ID: peripheral.id)){
+//            HStack {
+//                Text(peripheral.name)
+//                Spacer()
+//                Text(String(peripheral.rssi))
+//            }
+//        }
 //        Text("World")
 //    }
 //}

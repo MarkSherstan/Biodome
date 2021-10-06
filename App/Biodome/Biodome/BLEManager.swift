@@ -25,9 +25,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     @Published var soilMoisture: Float = 0
     @Published var sunIntensity: Float = 0
     
-    @Published var connectionState = "Disconnected"
+    @Published var connectionState = "Not Connected"
     @Published var isSwitchedOn = false
     @Published var peripherals = [Peripheral]()
+    @Published var connectionSelect = [Peripheral]()
     
     override init() {
         super.init()
@@ -53,11 +54,13 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
             peripheralName = "Unknown"
         }
         
-
-        if peripheralName.contains("Bio") {
-            let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-            peripherals.append(newPeripheral)
-        }
+        let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+        peripherals.append(newPeripheral)
+        
+//        if peripheralName.contains("Bio") {
+//            let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+//            peripherals.append(newPeripheral)
+//        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
