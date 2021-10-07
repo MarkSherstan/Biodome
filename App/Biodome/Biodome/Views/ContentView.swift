@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-// Put Name variable somehwere ??? Figure out name and UUID stuff some more -> add info tab
+// Add info tab
 // Connection timeout / error message?
-// If removed from list is peripheral refound?
-
+// Sometimes name goes on 2 lines?
 
 struct ContentView: View {
     @StateObject var bleManager = BLEManager()
@@ -82,6 +81,7 @@ struct ContentView_Previews: PreviewProvider {
 
 
 struct Widget: View {
+    @EnvironmentObject var bleManager: BLEManager
     var title: String
     var value: Float
     var units: String
@@ -109,10 +109,18 @@ struct Widget: View {
                         .foregroundColor(widgetColor)
                 }.padding(.top)
                 
-                Text(String(format: "%.0f%@", value, units))
-                    .font(.system(size: 40))
-                    .fontWeight(.bold)
-                    .foregroundColor(widgetColor)
+                if bleManager.connectionState == "Connected" {
+                    Text(String(format: "%.0f%@", value, units))
+                        .font(.system(size: 40))
+                        .fontWeight(.bold)
+                        .foregroundColor(widgetColor)
+                } else {
+                    Text("—")
+                        .font(.system(size: 40))
+                        .fontWeight(.bold)
+                        .foregroundColor(widgetColor)
+                }
+
             }
         }
     }
