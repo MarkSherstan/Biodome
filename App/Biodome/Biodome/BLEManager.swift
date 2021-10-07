@@ -1,5 +1,5 @@
 //
-//  BluetoothLink.swift
+//  BLEManager.swift
 //  Biodome
 //
 //  Created by Mark Sherstan on 2021-09-11.
@@ -55,13 +55,22 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
             peripheralName = "Unknown"
         }
         
-        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-        peripherals.append(newPeripheral)
+//        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+//        peripherals.append(newPeripheral)
         
-//        if peripheralName.contains("Bio") {
-//            let newPeripheral = Peripheral(id: peripherals.count, name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-//            peripherals.append(newPeripheral)
-//        }
+        if peripheralName.contains("Bio") {
+            let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+            
+            if connectionSelect.isEmpty{
+                // No entries yet
+                peripherals.append(newPeripheral)
+            } else if connectionSelect[0].perph.identifier == newPeripheral.perph.identifier {
+                // ID already connected - do nothing
+            } else {
+                // ID is not used append to connection array
+                peripherals.append(newPeripheral)
+            }
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -82,11 +91,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     
     func connect(selected: Peripheral){
         // Add to connection list
-        connectionSelect.insert(selected, at: 0)
-
-        if connectionSelect.count > 1 {
+        if connectionSelect.count == 1{
             disconnect()
-            connectionSelect.removeLast()
+            connectionSelect[0] = selected
+        } else {
+            connectionSelect.insert(selected, at: 0)
         }
         
         // Remove from search list
