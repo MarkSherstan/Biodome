@@ -9,13 +9,14 @@ import SwiftUI
 
 struct InfoView: View {
     @EnvironmentObject var bleManager: BLEManager
+    
     var body: some View {
         List {
-            Section(){
+            Section("About"){
                 HStack{
                     Text("Name")
                     Spacer()
-//                    Text(bleManager.selectedDevice.name).foregroundColor(.secondary)
+                    Text(bleManager.selectedDevice.name).foregroundColor(.secondary)
                 }
             }
 
@@ -25,6 +26,8 @@ struct InfoView: View {
             }
 
         }.listStyle(InsetGroupedListStyle())
+            .navigationBarTitle("Info")
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

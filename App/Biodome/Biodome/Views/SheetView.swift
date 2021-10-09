@@ -66,7 +66,8 @@ struct SheetView: View {
                     }
                 }
             }.listStyle(InsetGroupedListStyle())
-            .navigationBarHidden(true)
+            .navigationBarTitle("Device Manager")
+            .navigationBarTitleDisplayMode(.inline)
             .background(NavigationLink("", destination: InfoView(), isActive: $infoViewState))
         }
     }

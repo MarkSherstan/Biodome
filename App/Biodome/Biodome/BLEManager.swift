@@ -115,6 +115,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     func disconnect(){
         print("Disconnecting")
         centralManager.cancelPeripheralConnection(selectedPeripheral)
+        
+        // Move connected device back to search list and then clear connected list
+        peripherals.insert(connectionSelect[0], at: 0)
+        connectionSelect = [Peripheral]()
     }
     
     func startScanning() {

@@ -11,8 +11,7 @@ import SwiftUI
 // Sometimes name goes on 2 lines?
 // Clean up
 // Logo / icon
-// Clear connected list on disconnect
-// Connection window always pops up
+// Info view preview -> add characteristics?
 
 struct ContentView: View {
     @StateObject var bleManager = BLEManager()
