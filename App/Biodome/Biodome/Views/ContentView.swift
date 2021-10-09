@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-// Add info tab
 // Connection timeout / error message?
 // Sometimes name goes on 2 lines?
+// Clean up
+// Logo / icon
+// Clear connected list on disconnect
+// Connection window always pops up
 
 struct ContentView: View {
     @StateObject var bleManager = BLEManager()
@@ -120,7 +123,6 @@ struct Widget: View {
                         .fontWeight(.bold)
                         .foregroundColor(widgetColor)
                 }
-
             }
         }
     }

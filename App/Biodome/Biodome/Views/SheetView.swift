@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SelectedRow: View {
     @EnvironmentObject var bleManager: BLEManager
+    @Binding var infoViewState: Bool
     var peripheral: Peripheral
     
     var body: some View {
@@ -16,6 +17,10 @@ struct SelectedRow: View {
             Text(peripheral.name)
             Spacer()
             Text(bleManager.connectionState).foregroundColor(.secondary)
+            
+            Button(action: {
+                infoViewState = true
+            }) {Image(systemName: "info.circle")}.buttonStyle(BorderlessButtonStyle())
         }
     }
 }
@@ -40,26 +45,30 @@ struct PeripheralRow: View {
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var bleManager: BLEManager
+    @State private var infoViewState: Bool = false
     
     var body: some View {
-        
-        List {
-            Section(header: Text("Connected Device")){
-                ForEach(bleManager.connectionSelect) { peripheral in
-                    SelectedRow(peripheral: peripheral)
+        NavigationView {
+            List {
+                Section(header: Text("Connected Device")){
+                    ForEach(bleManager.connectionSelect) { peripheral in
+                        SelectedRow(infoViewState: $infoViewState, peripheral: peripheral)
+                    }
                 }
-            }
-            
-            Section(header:
-                HStack{
-                    Text("Devices  ")
-                    ProgressView()
-                }) {
-                ForEach(bleManager.peripherals) { peripheral in
-                    PeripheralRow(peripheral: peripheral)
+                
+                Section(header:
+                    HStack{
+                        Text("Devices  ")
+                        ProgressView()
+                    }) {
+                    ForEach(bleManager.peripherals) { peripheral in
+                        PeripheralRow(peripheral: peripheral)
+                    }
                 }
-            }
-        }.listStyle(InsetGroupedListStyle())
+            }.listStyle(InsetGroupedListStyle())
+            .navigationBarHidden(true)
+            .background(NavigationLink("", destination: InfoView(), isActive: $infoViewState))
+        }
     }
 }
 
