@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-// Connection timeout / error message?
 // Clean up
 // Logo / icon
-// Info view preview -> add characteristics?
 
 struct ContentView: View {
     @StateObject var bleManager = BLEManager()
