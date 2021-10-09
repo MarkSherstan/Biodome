@@ -8,7 +8,6 @@
 import SwiftUI
 
 // Connection timeout / error message?
-// Sometimes name goes on 2 lines?
 // Clean up
 // Logo / icon
 // Info view preview -> add characteristics?

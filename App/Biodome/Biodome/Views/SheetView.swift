@@ -36,7 +36,7 @@ struct PeripheralRow: View {
             Spacer()
             Button(action: {
                 bleManager.connect(selected: peripheral)
-            }){}
+            }){Text("")}
         }
     }
 }
