@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// Clean up
-// Logo / icon
-
 struct ContentView: View {
     @StateObject var bleManager = BLEManager()
     @State private var sheetState = false
