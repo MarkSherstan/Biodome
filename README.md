@@ -19,6 +19,9 @@ Sensor suite and webpage interface for monitoring plants around the house. Inspi
 - Check backorder on BME280 - Not currently used for V1
 - Make the board act as a shield for the Pi (pins and mounting holes)
 
+## TO DO
+If it disconnects -> option to reconnect? -> int 16 thing for converting bytes (in other app)
+
 ## To Order
 - RPi 40 pin cable: https://www.digikey.ca/en/products/detail/adafruit-industries-llc/1988/7241480
 - 5V supply (barallel plug - center postive - double check polarity)
