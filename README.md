@@ -19,8 +19,9 @@ Sensor suite and webpage interface for monitoring plants around the house. Inspi
 - Check backorder on BME280 - Not currently used for V1
 - Make the board act as a shield for the Pi (pins and mounting holes)
 
-## TO DO
-If it disconnects -> option to reconnect? -> int 16 thing for converting bytes (in other app)
+## To Do
+- If it disconnects -> option to reconnect?
+- Make webserver?
 
 ## To Order
 - RPi 40 pin cable: https://www.digikey.ca/en/products/detail/adafruit-industries-llc/1988/7241480
@@ -42,8 +43,6 @@ Style and UI:
 Other:
 - https://www.raywenderlich.com/2164-arduino-tutorial-integrating-bluetooth-le-and-ios-with-swift#toc-anchor-009
 
-
-
 ## RPi Setup
 https://github.com/Douglas6/cputemp
 
@@ -56,4 +55,3 @@ Open the bluetooth service file /usr/lib/systemd/system/bluetooth.service, or /e
 Add -P battery to the end of the ExecStart line to disable the Battery feature in bluetoothd. Your ExecStart should look something like ExecStart=/usr/lib/bluetooth/bluetoothd -P battery now.
 Save the file.
 Run systemctl daemon-reload and systemctl restart bluetooth to apply the changes to the Bluetooth service
-
