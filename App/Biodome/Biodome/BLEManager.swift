@@ -146,7 +146,6 @@ extension BLEManager: CBPeripheralDelegate{
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
       guard let services = peripheral.services else { return }
       for service in services {
-//        print(service)
         peripheral.discoverCharacteristics(nil, for: service)
       }
     }
@@ -155,14 +154,10 @@ extension BLEManager: CBPeripheralDelegate{
       guard let characteristics = service.characteristics else { return }
 
       for characteristic in characteristics {
-//        print(characteristic)
-
         if characteristic.properties.contains(.read) {
-//          print("\(characteristic.uuid): properties contains .read")
           peripheral.readValue(for: characteristic)
         }
         if characteristic.properties.contains(.notify) {
-//          print("\(characteristic.uuid): properties contains .notify")
           peripheral.setNotifyValue(true, for: characteristic)
         }
       }
@@ -174,7 +169,6 @@ extension BLEManager: CBPeripheralDelegate{
                 temperature = getSensorValue(from: characteristic)
             default:
                 break
-//                print("Unhandled Characteristic UUID: \(characteristic.uuid)")
         }
     }
 
@@ -182,6 +176,6 @@ extension BLEManager: CBPeripheralDelegate{
         guard let characteristicData = characteristic.value else { return -1 }
         let byteArray = [UInt8](characteristicData)
         
-        return Float(Int(byteArray[0]) << 8 + Int(byteArray[1])) / 10
+        return Float(Int16(byteArray[0]) << 8 + Int16(byteArray[1])) / 10
     }
 }
