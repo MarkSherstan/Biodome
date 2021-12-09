@@ -17,7 +17,7 @@ struct Peripheral: Identifiable {
     let perph: CBPeripheral
 }
 
-class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
+class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     var centralManager: CBCentralManager!
     var selectedPeripheral: CBPeripheral!
     var selectedDevice: Peripheral!
@@ -27,7 +27,6 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     @Published var sunIntensity: Float = 0
     
     @Published var connectionState = "Not Connected"
-    @Published var isSwitchedOn = false
     @Published var peripherals = [Peripheral]()
     @Published var connectionSelect = [Peripheral]()
     
@@ -39,10 +38,21 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn {
-            isSwitchedOn = true
-        } else {
-            isSwitchedOn = false
+        switch central.state {
+            case .poweredOff:
+                print("Is Powered Off.")
+            case .poweredOn:
+                print("Is Powered On.")
+            case .unsupported:
+                print("Is Unsupported.")
+            case .unauthorized:
+                print("Is Unauthorized.")
+            case .unknown:
+                print("Unknown")
+            case .resetting:
+                print("Resetting")
+            @unknown default:
+                print("Error")
         }
     }
     
@@ -87,6 +97,10 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
         print("Disconnected")
         connectionState = "Disconnected"
+        
+        // Move connected device back to search list and then clear connected list
+        peripherals.insert(connectionSelect[0], at: 0)
+        connectionSelect = [Peripheral]()
     }
     
     func connect(selected: Peripheral){
@@ -115,15 +129,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate{
     func disconnect(){
         print("Disconnecting")
         centralManager.cancelPeripheralConnection(selectedPeripheral)
-        
-        // Move connected device back to search list and then clear connected list
-        peripherals.insert(connectionSelect[0], at: 0)
-        connectionSelect = [Peripheral]()
     }
     
     func startScanning() {
-         print("Start scanning")
-          centralManager.scanForPeripherals(withServices: nil, options: nil)
+        print("Start scanning")
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
           // centralManager.scanForPeripherals(withServices: [someCBUUID])
      }
     
