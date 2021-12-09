@@ -24,12 +24,15 @@ struct InfoView: View {
                     
                 }
             }
-
-            Section(){
-                Button(action: {bleManager.disconnect()
-                }){Text("Disconnect")}
+            
+            Section() {
+                Button(action: {
+                    bleManager.disconnect()
+                }) {
+                    Text("Disconnect")
+                }
             }
-
+            
         }.listStyle(InsetGroupedListStyle())
             .navigationBarTitle("Info")
             .navigationBarTitleDisplayMode(.inline)
@@ -40,7 +43,7 @@ struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
         // Dark
         InfoView().preferredColorScheme(.dark).environmentObject(BLEManager())
-
+        
         // Light
         InfoView().preferredColorScheme(.light).environmentObject(BLEManager())
     }
