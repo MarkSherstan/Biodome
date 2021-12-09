@@ -20,7 +20,9 @@ struct SelectedRow: View {
             
             Button(action: {
                 infoViewState = true
-            }) {Image(systemName: "info.circle")}.buttonStyle(BorderlessButtonStyle())
+            }) {
+                Image(systemName: "info.circle")
+            }.buttonStyle(BorderlessButtonStyle())
         }
     }
 }
@@ -36,7 +38,9 @@ struct PeripheralRow: View {
             Spacer()
             Button(action: {
                 bleManager.connect(selected: peripheral)
-            }){Text("")}
+            }) {
+                Text("")
+            }
         }
     }
 }
@@ -56,19 +60,15 @@ struct SheetView: View {
                     }
                 }
                 
-                Section(header:
-                    HStack{
-                        Text("Devices  ")
-                        ProgressView()
-                    }) {
+                Section(header: HStack{Text("Devices  "); ProgressView()}) {
                     ForEach(bleManager.peripherals) { peripheral in
                         PeripheralRow(peripheral: peripheral)
                     }
                 }
             }.listStyle(InsetGroupedListStyle())
-            .navigationBarTitle("Device Manager")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(NavigationLink("", destination: InfoView(), isActive: $infoViewState))
+                .navigationBarTitle("Device Manager")
+                .navigationBarTitleDisplayMode(.inline)
+                .background(NavigationLink("", destination: InfoView(), isActive: $infoViewState))
         }
     }
 }
