@@ -59,8 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				1D26AD0626EC50880026378F /* BiodomeApp.swift */,
-				1DB97C8D26EDD8EB006805A5 /* Views */,
 				1DB97C8926EDCBCB006805A5 /* BLEManager.swift */,
+				1DB97C8D26EDD8EB006805A5 /* Views */,
 				1D26AD0A26EC50890026378F /* Assets.xcassets */,
 				1D26AD0F26EC50890026378F /* Info.plist */,
 				1D26AD0C26EC50890026378F /* Preview Content */,

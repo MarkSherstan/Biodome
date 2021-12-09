@@ -7,12 +7,13 @@
 
 import SwiftUI
 
+// Main Info View
 struct InfoView: View {
     @EnvironmentObject var bleManager: BLEManager
     
     var body: some View {
         List {
-            Section("About"){
+            Section("About") {
                 HStack{
                     Text("Name")
                     Spacer()
@@ -39,12 +40,11 @@ struct InfoView: View {
     }
 }
 
+// Preview
 struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
-        // Dark
         InfoView().preferredColorScheme(.dark).environmentObject(BLEManager())
         
-        // Light
         InfoView().preferredColorScheme(.light).environmentObject(BLEManager())
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Selected Rows
 struct SelectedRow: View {
     @EnvironmentObject var bleManager: BLEManager
     @Binding var infoViewState: Bool
@@ -27,7 +28,7 @@ struct SelectedRow: View {
     }
 }
 
-
+// Peripheral Rows
 struct PeripheralRow: View {
     @EnvironmentObject var bleManager: BLEManager
     var peripheral: Peripheral
@@ -45,7 +46,7 @@ struct PeripheralRow: View {
     }
 }
 
-
+// Main Sheet View
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var bleManager: BLEManager
@@ -54,7 +55,7 @@ struct SheetView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Connected Device")){
+                Section(header: Text("Connected Device")) {
                     ForEach(bleManager.connectionSelect) { peripheral in
                         SelectedRow(infoViewState: $infoViewState, peripheral: peripheral)
                     }
@@ -73,13 +74,11 @@ struct SheetView: View {
     }
 }
 
-
+// Preview
 struct SheetView_Previews: PreviewProvider {
     static var previews: some View {
-        // Dark
         SheetView().preferredColorScheme(.dark).environmentObject(BLEManager())
         
-        // Light
         SheetView().preferredColorScheme(.light).environmentObject(BLEManager())
     }
 }
