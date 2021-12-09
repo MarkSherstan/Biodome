@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Selected Rows
+// Connected devices
 struct SelectedRow: View {
     @EnvironmentObject var bleManager: BLEManager
     @Binding var infoViewState: Bool
@@ -28,7 +28,7 @@ struct SelectedRow: View {
     }
 }
 
-// Peripheral Rows
+// Available devices
 struct PeripheralRow: View {
     @EnvironmentObject var bleManager: BLEManager
     var peripheral: Peripheral
@@ -46,7 +46,7 @@ struct PeripheralRow: View {
     }
 }
 
-// Main Sheet View
+// Main sheet view
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var bleManager: BLEManager

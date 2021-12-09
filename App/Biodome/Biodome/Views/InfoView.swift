@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-// Main Info View
+// Main info view
 struct InfoView: View {
     @EnvironmentObject var bleManager: BLEManager
     
     var body: some View {
         List {
+            // Info about connected device
             Section("About") {
                 HStack{
                     Text("Name")
@@ -26,6 +27,7 @@ struct InfoView: View {
                 }
             }
             
+            // Disconnect button
             Section() {
                 Button(action: {
                     bleManager.disconnect()
