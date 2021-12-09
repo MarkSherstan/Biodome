@@ -21,7 +21,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     var centralManager: CBCentralManager!
     var selectedPeripheral: CBPeripheral!
     var selectedDevice: Peripheral!
-
+    
     @Published var temperature: Float = 0
     @Published var soilMoisture: Float = 0
     @Published var sunIntensity: Float = 0
@@ -32,7 +32,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     
     override init() {
         super.init()
-
+        
         centralManager = CBCentralManager(delegate: self, queue: nil)
         centralManager.delegate = self
     }
@@ -58,15 +58,15 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         var peripheralName: String!
-       
+        
         if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             peripheralName = name
         } else {
             peripheralName = "Unknown"
         }
         
-//        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-//        peripherals.append(newPeripheral)
+        //        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+        //        peripherals.append(newPeripheral)
         
         if peripheralName.contains("Bio") {
             let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
@@ -93,8 +93,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
         connectionState = "Connected"
         selectedPeripheral.discoverServices(nil)
     }
-       
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?){
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("Disconnected")
         connectionState = "Disconnected"
         
@@ -103,7 +103,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
         connectionSelect = [Peripheral]()
     }
     
-    func connect(selected: Peripheral){
+    func connect(selected: Peripheral) {
         // Add to connection list
         if connectionSelect.count == 1{
             disconnect()
@@ -126,7 +126,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
         centralManager.connect(selectedPeripheral)
     }
     
-    func disconnect(){
+    func disconnect() {
         print("Disconnecting")
         centralManager.cancelPeripheralConnection(selectedPeripheral)
     }
@@ -134,8 +134,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     func startScanning() {
         print("Start scanning")
         centralManager.scanForPeripherals(withServices: nil, options: nil)
-          // centralManager.scanForPeripherals(withServices: [someCBUUID])
-     }
+        // centralManager.scanForPeripherals(withServices: [someCBUUID])
+    }
     
     func stopScanning() {
         print("Stop scanning")
@@ -154,25 +154,25 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
 
 extension BLEManager: CBPeripheralDelegate{
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-      guard let services = peripheral.services else { return }
-      for service in services {
-        peripheral.discoverCharacteristics(nil, for: service)
-      }
+        guard let services = peripheral.services else { return }
+        for service in services {
+            peripheral.discoverCharacteristics(nil, for: service)
+        }
     }
-
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-      guard let characteristics = service.characteristics else { return }
-
-      for characteristic in characteristics {
-        if characteristic.properties.contains(.read) {
-          peripheral.readValue(for: characteristic)
+        guard let characteristics = service.characteristics else { return }
+        
+        for characteristic in characteristics {
+            if characteristic.properties.contains(.read) {
+                peripheral.readValue(for: characteristic)
+            }
+            if characteristic.properties.contains(.notify) {
+                peripheral.setNotifyValue(true, for: characteristic)
+            }
         }
-        if characteristic.properties.contains(.notify) {
-          peripheral.setNotifyValue(true, for: characteristic)
-        }
-      }
     }
-
+    
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         switch characteristic.uuid {
             case temperatureCBUUID:
@@ -181,7 +181,7 @@ extension BLEManager: CBPeripheralDelegate{
                 break
         }
     }
-
+    
     private func getSensorValue(from characteristic: CBCharacteristic) -> Float {
         guard let characteristicData = characteristic.value else { return -1 }
         let byteArray = [UInt8](characteristicData)
