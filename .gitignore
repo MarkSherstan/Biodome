@@ -1,6 +1,9 @@
 # MacOS
 .DS_Store
 
+# Xcode user specific config files
+xcuserdata/
+
 # For PCBs designed using KiCad: http://www.kicad-pcb.org/
 # Format documentation: http://kicad-pcb.org/help/file-formats/
 
