@@ -56,13 +56,13 @@ struct SheetView: View {
         NavigationView {
             List {
                 Section(header: Text("Connected Device")) {
-                    ForEach(bleManager.connectionSelect) { peripheral in
+                    ForEach(bleManager.connectedPeripherals) { peripheral in
                         SelectedRow(infoViewState: $infoViewState, peripheral: peripheral)
                     }
                 }
                 
                 Section(header: HStack{Text("Devices  "); ProgressView()}) {
-                    ForEach(bleManager.peripherals) { peripheral in
+                    ForEach(bleManager.availablePeripherals) { peripheral in
                         PeripheralRow(peripheral: peripheral)
                     }
                 }

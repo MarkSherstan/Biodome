@@ -20,15 +20,15 @@ struct Peripheral: Identifiable {
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     var centralManager: CBCentralManager!
     var selectedPeripheral: CBPeripheral!
-    var selectedDevice: Peripheral!
+    var selectedPeripheralName: String!
     
     @Published var temperature: Float = 0
     @Published var soilMoisture: Float = 0
     @Published var sunIntensity: Float = 0
     
     @Published var connectionState = "Not Connected"
-    @Published var peripherals = [Peripheral]()
-    @Published var connectionSelect = [Peripheral]()
+    @Published var availablePeripherals = [Peripheral]()
+    @Published var connectedPeripherals = [Peripheral]()
     
     override init() {
         super.init()
@@ -66,19 +66,19 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
         }
         
         //        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-        //        peripherals.append(newPeripheral)
+        //        availablePeripherals.append(newPeripheral)
         
         if peripheralName.contains("Bio") {
             let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
             
-            if connectionSelect.isEmpty{
+            if connectedPeripherals.isEmpty{
                 // No entries yet
-                peripherals.append(newPeripheral)
-            } else if connectionSelect[0].perph.identifier == newPeripheral.perph.identifier {
+                availablePeripherals.append(newPeripheral)
+            } else if connectedPeripherals[0].perph.identifier == newPeripheral.perph.identifier {
                 // ID already connected - do nothing
             } else {
                 // ID is not used append to connection array
-                peripherals.append(newPeripheral)
+                availablePeripherals.append(newPeripheral)
             }
         }
     }
@@ -99,28 +99,28 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
         connectionState = "Disconnected"
         
         // Move connected device back to search list and then clear connected list
-        peripherals.insert(connectionSelect[0], at: 0)
-        connectionSelect = [Peripheral]()
+        availablePeripherals.insert(connectedPeripherals[0], at: 0)
+        connectedPeripherals = [Peripheral]()
     }
     
     func connect(selected: Peripheral) {
         // Add to connection list
-        if connectionSelect.count == 1{
+        if connectedPeripherals.count == 1{
             disconnect()
-            connectionSelect[0] = selected
+            connectedPeripherals[0] = selected
         } else {
-            connectionSelect.insert(selected, at: 0)
+            connectedPeripherals.insert(selected, at: 0)
         }
         
         // Remove from search list
-        if let idx = peripherals.firstIndex(where: { $0.id == selected.id }) {
-            peripherals.remove(at: idx)
+        if let idx = availablePeripherals.firstIndex(where: { $0.id == selected.id }) {
+            availablePeripherals.remove(at: idx)
         }
         
         // Actually connect
         print("Connecting")
         connectionState = "Connecting"
-        selectedDevice = selected
+        selectedPeripheralName = selected.name
         selectedPeripheral = selected.perph
         selectedPeripheral.delegate = self
         centralManager.connect(selectedPeripheral)
@@ -144,7 +144,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     
     func toggleScanning(scanState: Bool) {
         if scanState {
-            peripherals = [Peripheral]()
+            availablePeripherals = [Peripheral]()
             startScanning()
         } else {
             stopScanning()

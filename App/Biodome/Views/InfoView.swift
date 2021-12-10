@@ -18,10 +18,10 @@ struct InfoView: View {
                 HStack{
                     Text("Name")
                     Spacer()
-                    if bleManager.connectionSelect.isEmpty {
+                    if bleManager.connectedPeripherals.isEmpty {
                         Text("")
                     } else {
-                        Text(bleManager.selectedDevice.name).foregroundColor(.secondary)
+                        Text(bleManager.selectedPeripheralName).foregroundColor(.secondary)
                     }
                     
                 }
