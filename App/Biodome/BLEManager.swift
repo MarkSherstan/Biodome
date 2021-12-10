@@ -38,15 +38,16 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        // Check hardware and software Bluetooth status
         switch central.state {
             case .poweredOff:
-                print("Is Powered Off.")
+                print("Bluetooth powered off")
             case .poweredOn:
-                print("Is Powered On.")
+                print("Bluetooth powered on")
             case .unsupported:
-                print("Is Unsupported.")
+                print("Bluetooth powered unsupported")
             case .unauthorized:
-                print("Is Unauthorized.")
+                print("Bluetooth powered unauthorized")
             case .unknown:
                 print("Unknown")
             case .resetting:
@@ -59,15 +60,14 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         var peripheralName: String!
         
+        // Set a name
         if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             peripheralName = name
         } else {
             peripheralName = "Unknown"
         }
-        
-        //        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-        //        availablePeripherals.append(newPeripheral)
-        
+
+        // Filter Bluetooth peripherals by name
         if peripheralName.contains("Bio") {
             let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
             
@@ -77,7 +77,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
             } else if connectedPeripherals[0].perph.identifier == newPeripheral.perph.identifier {
                 // ID already connected - do nothing
             } else {
-                // ID is not used append to connection array
+                // ID is not used, append to available array
                 availablePeripherals.append(newPeripheral)
             }
         }
@@ -98,13 +98,13 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
         print("Disconnected")
         connectionState = "Disconnected"
         
-        // Move connected device back to search list and then clear connected list
+        // Move connected perph back to available array and then clear connected array
         availablePeripherals.insert(connectedPeripherals[0], at: 0)
         connectedPeripherals = [Peripheral]()
     }
     
     func connect(selected: Peripheral) {
-        // Add to connection list
+        // Add perph to connected array (only 1 at a time)
         if connectedPeripherals.count == 1{
             disconnect()
             connectedPeripherals[0] = selected
@@ -112,7 +112,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
             connectedPeripherals.insert(selected, at: 0)
         }
         
-        // Remove from search list
+        // Remove from available array
         if let idx = availablePeripherals.firstIndex(where: { $0.id == selected.id }) {
             availablePeripherals.remove(at: idx)
         }
