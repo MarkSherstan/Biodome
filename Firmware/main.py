@@ -8,22 +8,22 @@ from gpiozero import CPUTemperature
 
 GATT_CHRC_IFACE = "org.bluez.GattCharacteristic1"
 NOTIFY_TIMEOUT = 5000
-masterUUID = "00000000-710e-4a5b-8d75-3e5b444bc3cf"
+
+BiodomeUUID = "00000000-710e-4a5b-8d75-3e5b444bc3cf"
+TemperatureServiceUUID = "00000001-710e-4a5b-8d75-3e5b444bc3cf"
 
 class BiodomeAdvertisement(Advertisement):
     def __init__(self, index):
         Advertisement.__init__(self, index, "peripheral")
         self.add_local_name("Biodome")
-        self.add_service_uuid(masterUUID)
+        self.add_service_uuid(BiodomeUUID)
         self.include_tx_power = True
 
-class BiodomeService(Service):
-    biodomeUUID = "00000001-710e-4a5b-8d75-3e5b444bc3cf"
-
+class TemperatureService(Service):
     def __init__(self, index):
         # self.farenheit = True
 
-        Service.__init__(self, index, self.biodomeUUID, True)
+        Service.__init__(self, index, TemperatureServiceUUID, True)
         self.add_characteristic(TemperatureCharacteristic(self))
         # self.add_characteristic(UnitCharacteristic(self))
 
@@ -145,7 +145,7 @@ class TemperatureCharacteristic(Characteristic):
 #         return value
 
 app = Application()
-app.add_service(BiodomeService(0))
+app.add_service(TemperatureService(0))
 app.register()
 
 adv = BiodomeAdvertisement(0)
