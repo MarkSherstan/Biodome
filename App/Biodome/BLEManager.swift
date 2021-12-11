@@ -8,7 +8,9 @@
 import Foundation
 import CoreBluetooth
 
-let temperatureCBUUID = CBUUID(string: "00000002-710E-4A5B-8D75-3E5B444BC3CF")
+let biodomeServiceCBUUID = CBUUID(string: "00000000-0000-4A5B-8D75-3E5B444BC3CF")
+let temperatureCharAlphaUUID = CBUUID(string: "00000001-AAAA-4A5B-8D75-3E5B444BC3CF")
+let temperatureCharBetaUUID  = CBUUID(string: "00000001-BBBB-4A5B-8D75-3E5B444BC3CF")
 
 struct Peripheral: Identifiable {
     let id = UUID()
@@ -133,8 +135,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     
     func startScanning() {
         print("Start scanning")
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
-        // centralManager.scanForPeripherals(withServices: [someCBUUID])
+        centralManager.scanForPeripherals(withServices: [biodomeServiceCBUUID])
+        // centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     
     func stopScanning() {
@@ -175,7 +177,9 @@ extension BLEManager: CBPeripheralDelegate{
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         switch characteristic.uuid {
-            case temperatureCBUUID:
+            case temperatureCharAlphaUUID:
+                temperature = getSensorValue(from: characteristic)
+            case temperatureCharBetaUUID:
                 temperature = getSensorValue(from: characteristic)
             default:
                 break
