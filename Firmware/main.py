@@ -40,7 +40,7 @@ class TempCharacteristic(Characteristic):
         Characteristic.__init__(
                 self, self.TEMP_CHARACTERISTIC_UUID,
                 ["notify", "read"], service)
-        self.add_descriptor(TempDescriptor(self))
+        # self.add_descriptor(TempDescriptor(self))
 
     def get_temperature(self):
         value = []
@@ -79,24 +79,24 @@ class TempCharacteristic(Characteristic):
 
         return value
 
-class TempDescriptor(Descriptor):
-    TEMP_DESCRIPTOR_UUID = "2901"
-    TEMP_DESCRIPTOR_VALUE = "CPU Temperature"
+# class TempDescriptor(Descriptor):
+#     TEMP_DESCRIPTOR_UUID = "2901"
+#     TEMP_DESCRIPTOR_VALUE = "CPU Temperature"
 
-    def __init__(self, characteristic):
-        Descriptor.__init__(
-                self, self.TEMP_DESCRIPTOR_UUID,
-                ["read"],
-                characteristic)
+#     def __init__(self, characteristic):
+#         Descriptor.__init__(
+#                 self, self.TEMP_DESCRIPTOR_UUID,
+#                 ["read"],
+#                 characteristic)
 
-    def ReadValue(self, options):
-        value = []
-        desc = self.TEMP_DESCRIPTOR_VALUE
+#     def ReadValue(self, options):
+#         value = []
+#         desc = self.TEMP_DESCRIPTOR_VALUE
 
-        for c in desc:
-            value.append(dbus.Byte(c.encode()))
+#         for c in desc:
+#             value.append(dbus.Byte(c.encode()))
 
-        return value
+#         return value
 
 # class UnitCharacteristic(Characteristic):
 #     UNIT_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
@@ -153,3 +153,5 @@ try:
     app.run()
 except KeyboardInterrupt:
     app.quit()
+
+# https://btprodspecificationrefs.blob.core.windows.net/assigned-values/16-bit%20UUID%20Numbers%20Document.pdf
