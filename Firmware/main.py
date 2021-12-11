@@ -8,11 +8,13 @@ from gpiozero import CPUTemperature
 
 GATT_CHRC_IFACE = "org.bluez.GattCharacteristic1"
 NOTIFY_TIMEOUT = 5000
+masterUUID = "00000000-710e-4a5b-8d75-3e5b444bc3cf"
 
 class BiodomeAdvertisement(Advertisement):
     def __init__(self, index):
         Advertisement.__init__(self, index, "peripheral")
         self.add_local_name("Biodome")
+        self.add_service_uuid(masterUUID)
         self.include_tx_power = True
 
 class BiodomeService(Service):
