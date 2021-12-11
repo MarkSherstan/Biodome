@@ -1,10 +1,10 @@
-import sys
-sys.path.append('GATT-Server')
-
+import random
 import dbus
+import sys
+
+sys.path.append('GATT-Server')
 from advertisement import Advertisement
-from service import Application, Service, Characteristic, Descriptor
-from gpiozero import CPUTemperature
+from service import Application, Service, Characteristic
 
 NOTIFY_TIMEOUT = 5000
 
@@ -34,10 +34,10 @@ class TemperatureCharacteristic(Characteristic):
     def get_temperature(self):
         value = []
 
-        cpu = CPUTemperature()
-        temp = int(round(cpu.temperature, 1) * 10)
-        byteArray = temp.to_bytes(2, byteorder='big', signed=True)
+        temp = int(random.random() * 1000) - 500
+        print(temp)
 
+        byteArray = temp.to_bytes(2, byteorder='big', signed=True)
         for b in byteArray:
             value.append(dbus.Byte(b))
 
@@ -79,5 +79,3 @@ try:
     app.run()
 except KeyboardInterrupt:
     app.quit()
-
-# https://btprodspecificationrefs.blob.core.windows.net/assigned-values/16-bit%20UUID%20Numbers%20Document.pdf
