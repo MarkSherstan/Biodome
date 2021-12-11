@@ -24,7 +24,8 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     var selectedPeripheral: CBPeripheral!
     var selectedPeripheralName: String!
     
-    @Published var temperature: Float = 0
+    @Published var temperatureA: Float = 0
+    @Published var temperatureB: Float = 0
     @Published var soilMoisture: Float = 0
     @Published var sunIntensity: Float = 0
     
@@ -177,9 +178,9 @@ extension BLEManager: CBPeripheralDelegate{
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         switch characteristic.uuid {
             case temperatureCharAlphaUUID:
-                temperature = getSensorValue(from: characteristic)
+                temperatureA = getSensorValue(from: characteristic)
             case temperatureCharBetaUUID:
-                temperature = getSensorValue(from: characteristic)
+                temperatureB = getSensorValue(from: characteristic)
             default:
                 break
         }

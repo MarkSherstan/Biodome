@@ -86,8 +86,8 @@ struct ContentView: View {
             // Sensor widget entries
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: 20) {
-                    Widget(parameters: temperatureAlphaParms, value: bleManager.temperature)
-                    Widget(parameters: temperatureBetaParms, value: bleManager.temperature)
+                    Widget(parameters: temperatureAlphaParms, value: bleManager.temperatureA)
+                    Widget(parameters: temperatureBetaParms, value: bleManager.temperatureB)
                     Widget(parameters: lightParms, value: bleManager.sunIntensity)
                     Widget(parameters: moistureParms, value: bleManager.soilMoisture)
                 }
