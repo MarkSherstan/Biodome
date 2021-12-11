@@ -69,19 +69,18 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate {
             peripheralName = "Unknown"
         }
 
-        // Filter Bluetooth peripherals by name
-        if peripheralName.contains("Bio") {
-            let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
-            
-            if connectedPeripherals.isEmpty{
-                // No entries yet
-                availablePeripherals.append(newPeripheral)
-            } else if connectedPeripherals[0].perph.identifier == newPeripheral.perph.identifier {
-                // ID already connected - do nothing
-            } else {
-                // ID is not used, append to available array
-                availablePeripherals.append(newPeripheral)
-            }
+        // Save to structure
+        let newPeripheral = Peripheral(name: peripheralName, rssi: RSSI.intValue, perph: peripheral)
+        
+        // Store the data
+        if connectedPeripherals.isEmpty{
+            // No entries yet
+            availablePeripherals.append(newPeripheral)
+        } else if connectedPeripherals[0].perph.identifier == newPeripheral.perph.identifier {
+            // ID already connected - do nothing
+        } else {
+            // ID is not used, append to available array
+            availablePeripherals.append(newPeripheral)
         }
     }
     
