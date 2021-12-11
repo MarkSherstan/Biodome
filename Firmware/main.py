@@ -6,34 +6,30 @@ from advertisement import Advertisement
 from service import Application, Service, Characteristic, Descriptor
 from gpiozero import CPUTemperature
 
-GATT_CHRC_IFACE = "org.bluez.GattCharacteristic1"
 NOTIFY_TIMEOUT = 5000
 
-BiodomeUUID = "00000000-710e-4a5b-8d75-3e5b444bc3cf"
-TemperatureServiceUUID = "00000001-710e-4a5b-8d75-3e5b444bc3cf"
+biodomeServiceUUID = "00000000-0000-4A5B-8D75-3E5B444BC3CF"
+temperatureServiceUUID   = "00000001-0000-4A5B-8D75-3E5B444BC3CF"
+temperatureCharAlphaUUID = "00000001-AAAA-4A5B-8D75-3E5B444BC3CF"
+temperatureCharBetaUUID  = "00000001-BBBB-4A5B-8D75-3E5B444BC3CF"
 
 class BiodomeAdvertisement(Advertisement):
     def __init__(self, index):
         Advertisement.__init__(self, index, "peripheral")
         self.add_local_name("Biodome")
-        self.add_service_uuid(BiodomeUUID)
+        self.add_service_uuid(biodomeServiceUUID)
         self.include_tx_power = True
 
 class TemperatureService(Service):
     def __init__(self, index):
-        Service.__init__(self, index, TemperatureServiceUUID, True)
-        self.add_characteristic(TemperatureCharacteristic(self))
-
+        Service.__init__(self, index, temperatureServiceUUID, True)
+        self.add_characteristic(TemperatureCharacteristic(self, temperatureCharAlphaUUID))
+        self.add_characteristic(TemperatureCharacteristic(self, temperatureCharBetaUUID))
 
 class TemperatureCharacteristic(Characteristic):
-    TEMP_CHARACTERISTIC_UUID = "00000002-710e-4a5b-8d75-3e5b444bc3cf"
-
-    def __init__(self, service):
+    def __init__(self, service, UUID):
         self.notifying = False
-
-        Characteristic.__init__(
-                self, self.TEMP_CHARACTERISTIC_UUID,
-                ["notify", "read"], service)
+        Characteristic.__init__(self, UUID, ["notify", "read"], service)
 
     def get_temperature(self):
         value = []
@@ -50,7 +46,7 @@ class TemperatureCharacteristic(Characteristic):
     def set_temperature_callback(self):
         if self.notifying:
             value = self.get_temperature()
-            self.PropertiesChanged(GATT_CHRC_IFACE, {"Value": value}, [])
+            self.PropertiesChanged("org.bluez.GattCharacteristic1", {"Value": value}, [])
 
         return self.notifying
 
@@ -61,7 +57,7 @@ class TemperatureCharacteristic(Characteristic):
         self.notifying = True
 
         value = self.get_temperature()
-        self.PropertiesChanged(GATT_CHRC_IFACE, {"Value": value}, [])
+        self.PropertiesChanged("org.bluez.GattCharacteristic1", {"Value": value}, [])
         self.add_timeout(NOTIFY_TIMEOUT, self.set_temperature_callback)
 
     def StopNotify(self):
