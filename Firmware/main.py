@@ -21,17 +21,9 @@ class BiodomeAdvertisement(Advertisement):
 
 class TemperatureService(Service):
     def __init__(self, index):
-        # self.farenheit = True
-
         Service.__init__(self, index, TemperatureServiceUUID, True)
         self.add_characteristic(TemperatureCharacteristic(self))
-        # self.add_characteristic(UnitCharacteristic(self))
 
-    # def is_farenheit(self):
-    #     return self.farenheit
-
-    # def set_farenheit(self, farenheit):
-    #     self.farenheit = farenheit
 
 class TemperatureCharacteristic(Characteristic):
     TEMP_CHARACTERISTIC_UUID = "00000002-710e-4a5b-8d75-3e5b444bc3cf"
@@ -42,7 +34,6 @@ class TemperatureCharacteristic(Characteristic):
         Characteristic.__init__(
                 self, self.TEMP_CHARACTERISTIC_UUID,
                 ["notify", "read"], service)
-        # self.add_descriptor(TempDescriptor(self))
 
     def get_temperature(self):
         value = []
@@ -80,69 +71,6 @@ class TemperatureCharacteristic(Characteristic):
         value = self.get_temperature()
 
         return value
-
-# class TempDescriptor(Descriptor):
-#     TEMP_DESCRIPTOR_UUID = "2901"
-#     TEMP_DESCRIPTOR_VALUE = "CPU Temperature"
-
-#     def __init__(self, characteristic):
-#         Descriptor.__init__(
-#                 self, self.TEMP_DESCRIPTOR_UUID,
-#                 ["read"],
-#                 characteristic)
-
-#     def ReadValue(self, options):
-#         value = []
-#         desc = self.TEMP_DESCRIPTOR_VALUE
-
-#         for c in desc:
-#             value.append(dbus.Byte(c.encode()))
-
-#         return value
-
-# class UnitCharacteristic(Characteristic):
-#     UNIT_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
-
-#     def __init__(self, service):
-#         Characteristic.__init__(
-#                 self, self.UNIT_CHARACTERISTIC_UUID,
-#                 ["read", "write"], service)
-#         self.add_descriptor(UnitDescriptor(self))
-
-#     def WriteValue(self, value, options):
-#         val = str(value[0]).upper()
-#         if val == "C":
-#             self.service.set_farenheit(False)
-#         elif val == "F":
-#             self.service.set_farenheit(True)
-
-#     def ReadValue(self, options):
-#         value = []
-
-#         if self.service.is_farenheit(): val = "F"
-#         else: val = "C"
-#         value.append(dbus.Byte(val.encode()))
-
-#         return value
-
-# class UnitDescriptor(Descriptor):
-#     UNIT_DESCRIPTOR_UUID = "2901"
-#     UNIT_DESCRIPTOR_VALUE = "Temperature Units (F or C)"
-
-#     def __init__(self, characteristic):
-#         Descriptor.__init__(
-#                 self, self.UNIT_DESCRIPTOR_UUID,
-#                 ["read"],
-#                 characteristic)
-
-#     def ReadValue(self, options):
-#         value = []
-#         desc = self.UNIT_DESCRIPTOR_VALUE
-
-#         for c in desc:
-#             value.append(dbus.Byte(c.encode()))
-
-#         return value
 
 app = Application()
 app.add_service(TemperatureService(0))
