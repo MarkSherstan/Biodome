@@ -9,9 +9,16 @@ from sensors import *
 NOTIFY_TIMEOUT = 2500
 
 biodomeServiceUUID = "00000000-0000-4A5B-8D75-3E5B444BC3CF"
+
 temperatureServiceUUID   = "00000001-0000-4A5B-8D75-3E5B444BC3CF"
 temperatureCharAlphaUUID = "00000001-AAAA-4A5B-8D75-3E5B444BC3CF"
 temperatureCharBetaUUID  = "00000001-BBBB-4A5B-8D75-3E5B444BC3CF"
+
+moistureServiceUUID = "00000002-0000-4A5B-8D75-3E5B444BC3CF"
+moistureCharUUID    = "00000002-AAAA-4A5B-8D75-3E5B444BC3CF"
+
+lightServiceUUID = "00000003-0000-4A5B-8D75-3E5B444BC3CF"
+lightCharUUID    = "00000003-AAAA-4A5B-8D75-3E5B444BC3CF"
 
 class BiodomeAdvertisement(Advertisement):
     def __init__(self, index):
@@ -25,6 +32,16 @@ class TemperatureService(Service):
         Service.__init__(self, index, temperatureServiceUUID, True)
         self.add_characteristic(GeneralCharacteristic(self, temperatureCharAlphaUUID, TemperatureSensor()))
         self.add_characteristic(GeneralCharacteristic(self, temperatureCharBetaUUID, TemperatureSensor()))
+
+class MoistureService(Service):
+    def __init__(self, index):
+        Service.__init__(self, index, moistureServiceUUID, True)
+        self.add_characteristic(GeneralCharacteristic(self, moistureCharUUID, TemperatureSensor()))
+
+class LightService(Service):
+    def __init__(self, index):
+        Service.__init__(self, index, lightServiceUUID, True)
+        self.add_characteristic(GeneralCharacteristic(self, lightCharUUID, TemperatureSensor()))
 
 class GeneralCharacteristic(Characteristic):
     def __init__(self, service, UUID, sensor):
