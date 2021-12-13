@@ -1,10 +1,10 @@
-import random
 import dbus
 import sys
 
 sys.path.append('GATT-Server')
 from advertisement import Advertisement
 from service import Application, Service, Characteristic
+from sensors import *
 
 NOTIFY_TIMEOUT = 2500
 
@@ -23,19 +23,19 @@ class BiodomeAdvertisement(Advertisement):
 class TemperatureService(Service):
     def __init__(self, index):
         Service.__init__(self, index, temperatureServiceUUID, True)
-        self.add_characteristic(GeneralCharacteristic(self, temperatureCharAlphaUUID))
-        self.add_characteristic(GeneralCharacteristic(self, temperatureCharBetaUUID))
+        self.add_characteristic(GeneralCharacteristic(self, temperatureCharAlphaUUID, TemperatureSensor()))
+        self.add_characteristic(GeneralCharacteristic(self, temperatureCharBetaUUID, TemperatureSensor()))
 
 class GeneralCharacteristic(Characteristic):
-    def __init__(self, service, UUID):
+    def __init__(self, service, UUID, sensor):
+        self.sensor = sensor
         self.notifying = False
         Characteristic.__init__(self, UUID, ["notify", "read"], service)
 
     def getValue(self):
         value = []
 
-        temp = int(random.random() * 1000) - 500
-        print(temp)
+        temp = self.sensor.getValue()
 
         byteArray = temp.to_bytes(2, byteorder='big', signed=True)
         for b in byteArray:
@@ -67,4 +67,3 @@ class GeneralCharacteristic(Characteristic):
         value = self.getValue()
 
         return value
-
