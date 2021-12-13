@@ -36,12 +36,12 @@ class TemperatureService(Service):
 class MoistureService(Service):
     def __init__(self, index):
         Service.__init__(self, index, moistureServiceUUID, True)
-        self.add_characteristic(GeneralCharacteristic(self, moistureCharUUID, TemperatureSensor()))
+        self.add_characteristic(GeneralCharacteristic(self, moistureCharUUID, MoistureSensor()))
 
 class LightService(Service):
     def __init__(self, index):
         Service.__init__(self, index, lightServiceUUID, True)
-        self.add_characteristic(GeneralCharacteristic(self, lightCharUUID, TemperatureSensor()))
+        self.add_characteristic(GeneralCharacteristic(self, lightCharUUID, LightSensor()))
 
 class GeneralCharacteristic(Characteristic):
     def __init__(self, service, UUID, sensor):
