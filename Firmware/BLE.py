@@ -68,14 +68,3 @@ class GeneralCharacteristic(Characteristic):
 
         return value
 
-app = Application()
-app.add_service(TemperatureService(0))
-app.register()
-
-adv = BiodomeAdvertisement(0)
-adv.register()
-
-try:
-    app.run()
-except KeyboardInterrupt:
-    app.quit()
