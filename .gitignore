@@ -1,6 +1,9 @@
 # MacOS
 .DS_Store
 
+# Xcode user specific config files
+xcuserdata/
+
 # Python cache files
 *.pyc
 
