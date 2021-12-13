@@ -69,3 +69,12 @@ Other:
 * Website JavaScript interface (similar to Octo-Print)
 * Slow logging... Log on ram for 24h then save to SD card (Dont burn out SD card)
 * Photos/Image Processing, moisture, humidity, temperature, light, pressure
+
+
+# Node Install Instructions (RPi)
+sudo apt-get update
+sudo apt-get dist-upgrade
+
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v
