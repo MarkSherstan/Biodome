@@ -11,6 +11,8 @@ import CoreBluetooth
 let biodomeServiceCBUUID = CBUUID(string: "00000000-0000-4A5B-8D75-3E5B444BC3CF")
 let temperatureCharAlphaUUID = CBUUID(string: "00000001-AAAA-4A5B-8D75-3E5B444BC3CF")
 let temperatureCharBetaUUID  = CBUUID(string: "00000001-BBBB-4A5B-8D75-3E5B444BC3CF")
+let moistureCharUUID = CBUUID(string: "00000002-AAAA-4A5B-8D75-3E5B444BC3CF")
+let lightCharUUID = CBUUID(string: "00000003-AAAA-4A5B-8D75-3E5B444BC3CF")
 
 struct Peripheral: Identifiable {
     let id = UUID()
@@ -181,6 +183,10 @@ extension BLEManager: CBPeripheralDelegate{
                 temperatureA = getSensorValue(from: characteristic)
             case temperatureCharBetaUUID:
                 temperatureB = getSensorValue(from: characteristic)
+            case moistureCharUUID:
+                soilMoisture = getSensorValue(from: characteristic)
+            case lightCharUUID:
+                sunIntensity = getSensorValue(from: characteristic)
             default:
                 break
         }
@@ -190,6 +196,6 @@ extension BLEManager: CBPeripheralDelegate{
         guard let characteristicData = characteristic.value else { return -1 }
         let byteArray = [UInt8](characteristicData)
         
-        return Float(Int16(byteArray[0]) << 8 + Int16(byteArray[1])) / 10
+        return Float(Int16(byteArray[0]) << 8 + Int16(byteArray[1]))
     }
 }
