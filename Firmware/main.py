@@ -6,7 +6,7 @@ sys.path.append('GATT-Server')
 from advertisement import Advertisement
 from service import Application, Service, Characteristic
 
-NOTIFY_TIMEOUT = 5000
+NOTIFY_TIMEOUT = 2500
 
 biodomeServiceUUID = "00000000-0000-4A5B-8D75-3E5B444BC3CF"
 temperatureServiceUUID   = "00000001-0000-4A5B-8D75-3E5B444BC3CF"
@@ -31,7 +31,7 @@ class TemperatureCharacteristic(Characteristic):
         self.notifying = False
         Characteristic.__init__(self, UUID, ["notify", "read"], service)
 
-    def get_temperature(self):
+    def getValue(self):
         value = []
 
         temp = int(random.random() * 1000) - 500
@@ -43,9 +43,9 @@ class TemperatureCharacteristic(Characteristic):
 
         return value
 
-    def set_temperature_callback(self):
+    def callback(self):
         if self.notifying:
-            value = self.get_temperature()
+            value = self.getValue()
             self.PropertiesChanged("org.bluez.GattCharacteristic1", {"Value": value}, [])
 
         return self.notifying
@@ -56,15 +56,15 @@ class TemperatureCharacteristic(Characteristic):
 
         self.notifying = True
 
-        value = self.get_temperature()
+        value = self.getValue()
         self.PropertiesChanged("org.bluez.GattCharacteristic1", {"Value": value}, [])
-        self.add_timeout(NOTIFY_TIMEOUT, self.set_temperature_callback)
+        self.add_timeout(NOTIFY_TIMEOUT, self.callback)
 
     def StopNotify(self):
         self.notifying = False
 
     def ReadValue(self, options):
-        value = self.get_temperature()
+        value = self.getValue()
 
         return value
 
