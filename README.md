@@ -12,40 +12,38 @@ Hardware, firmware, and Bluetooth Low Energy (BLE) iOS app for monitoring plants
 * Device running iOS 15.0 or greater (UI built for iPhone Xs)
 
 ## Hardware
-* Raspberry Pi 3B+ (probably works on others)
-* Custom PCB board 
-
-Boards are built with KiCad 5 and manufactured by JLCPCB.
+* Raspberry Pi 3B+
+* Custom PCB board (boards are built with KiCad 5 and manufactured by JLCPCB))
 
 ## Firmware
 * Python 3 
-* Standard Raspbian
+* Standard Raspbian OS
 
 # Setup
 ## App
-Build using Xcode and upload to iOS device. See `/Resources` for example screenshots of the app using simulated data.
+* Build using Xcode and upload to iOS device. See `/Resources` for example screenshots of the app using simulated data.
 
 ## Hardware
-
+* Power on system (remember RPi is 3V3 logic)
 
 ## Firmware
-https://github.com/Douglas6/cputemp
-
-As of BlueZ version 5.43 (currently shipped with Raspbian Stretch), some BLE aspects are still experimental. You will need to add the 'Experimental' flag to the bluetooth daemon. Do this: sudo nano /etc/systemd/system/dbus-org.bluez.service and add the '-E' flag at the end of the 'ExecStart' line. It should look like this:
-
+As of BlueZ version 5.43 (currently shipped with Raspbian), some BLE aspects are still experimental. You will need to add the 'Experimental' flag to the bluetooth daemon. Open the file: `sudo nano /etc/systemd/system/dbus-org.bluez.service` and add the `-E` flag at the end of the `ExecStart` line. It should look like this:
+```
 ExecStart=/usr/lib/bluetooth/bluetoothd -E
+```
+To disable auto battery reading and prevent connection issues, edit the same file and add `-P battery` to the end of the `ExecStart` line to disable the Battery feature in bluetooth. Your ExecStart should look something like:
+```
+ExecStart=/usr/lib/bluetooth/bluetoothd -E -P battery
+```
+Run `systemctl daemon-reload` and `systemctl restart bluetooth` to apply the changes to the Bluetooth service
 
-To disable auto Battery reading
-Open the bluetooth service file /usr/lib/systemd/system/bluetooth.service, or /etc/systemd/system/bluetooth.target.wants/bluetooth.service in a text editor. You may need sudo permission to write to this file.
-Add -P battery to the end of the ExecStart line to disable the Battery feature in bluetoothd. Your ExecStart should look something like ExecStart=/usr/lib/bluetooth/bluetoothd -P battery now.
-Save the file.
-Run systemctl daemon-reload and systemctl restart bluetooth to apply the changes to the Bluetooth service
-
-Navigate to `\Firmware` and run `python3 main.py`.
+Navigate to `\Firmware` and run `python3 main.py`. The RPi is now ready to share values with the iOS app.
 
 # Future Work
 ## App
-* If it disconnects -> option to reconnect?
+* Fix connection logic
+* Connect to multiple devices
+* More general UI layout
 
 ### Resources 
 Core Bluetooth
@@ -63,7 +61,7 @@ Other:
 * https://www.raywenderlich.com/2164-arduino-tutorial-integrating-bluetooth-le-and-ios-with-swift#toc-anchor-009
 
 ## Hardware
-* Use digital pin to wake up sensor (change to 3.3V 555 timer)
+* Use digital pin to wake up moisture sensor (change to 3.3V 555 timer)
 * Check backorder on BME280 - Not currently used for V1
 * Make the board act as a shield for the Pi (pins and mounting holes)
 
