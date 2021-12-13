@@ -1,7 +1,9 @@
 # Biodome
 Hardware, firmware, and Bluetooth Low Energy (BLE) iOS app for monitoring plants around the house. Inspired by the Cloud Forest in Singapore.
 
-![](https://github.com/MarkSherstan/Biodome/blob/main/Resources/CloudForestSingapore.png | width=250)
+<p align="center">
+  <img src="https://github.com/MarkSherstan/Biodome/blob/main/Resources/CloudForestSingapore.png" width="250"/>
+</p>
 
 # Requirements
 ## App
