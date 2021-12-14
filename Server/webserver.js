@@ -1,16 +1,16 @@
-var http = require('http').createServer(handler); //require http server, and create server with function handler()
-var fs = require('fs'); //require filesystem module
+var http = require('http').createServer(handler);
+var fs = require('fs');
 
-http.listen(8000); //listen to port 8000
+http.listen(8000);
 
-function handler(req, res) { //create server
-    fs.readFile(__dirname + 'index.html', function(err, data) { //read file index.html in public folder
+function handler(req, res) {
+    fs.readFile(__dirname + 'index.html', function(err, data) {
         if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/html' }); //display 404 on error
+            res.writeHead(404, { 'Content-Type': 'text/html' });
             return res.end("404 Not Found");
         }
-        res.writeHead(200, { 'Content-Type': 'text/html' }); //write HTML
-        res.write(data); //write data from index.html
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(data);
         return res.end();
     });
 }
