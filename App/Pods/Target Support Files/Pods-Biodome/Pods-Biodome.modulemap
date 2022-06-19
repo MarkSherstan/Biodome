@@ -1,0 +1,6 @@
+framework module Pods_Biodome {
+  umbrella header "Pods-Biodome-umbrella.h"
+
+  export *
+  module * { export * }
+}

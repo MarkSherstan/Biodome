@@ -14,6 +14,7 @@
 		1D26AD0E26EC50890026378F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D26AD0D26EC50890026378F /* Preview Assets.xcassets */; };
 		1DB97C8A26EDCBCB006805A5 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB97C8926EDCBCB006805A5 /* BLEManager.swift */; };
 		1DFF3AC3270E6D820060DCF1 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFF3AC2270E6D820060DCF1 /* SheetView.swift */; };
+		B02FFC57FEB8E715D3CB452D /* Pods_Biodome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560ADC8743FEE1175F3A3939 /* Pods_Biodome.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,9 @@
 		1D26AD0F26EC50890026378F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1DB97C8926EDCBCB006805A5 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		1DFF3AC2270E6D820060DCF1 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		3C19F065F19A96B84B8E4DF8 /* Pods-Biodome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biodome.debug.xcconfig"; path = "Target Support Files/Pods-Biodome/Pods-Biodome.debug.xcconfig"; sourceTree = "<group>"; };
+		560ADC8743FEE1175F3A3939 /* Pods_Biodome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Biodome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A1AAF2B42F0F8A20F48BD1F /* Pods-Biodome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biodome.release.xcconfig"; path = "Target Support Files/Pods-Biodome/Pods-Biodome.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B02FFC57FEB8E715D3CB452D /* Pods_Biodome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00F6F5A9B0B7862B4160B26B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				560ADC8743FEE1175F3A3939 /* Pods_Biodome.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1D26ACFA26EC50880026378F = {
 			isa = PBXGroup;
 			children = (
 				1D26AD0526EC50880026378F /* Biodome */,
 				1D26AD0426EC50880026378F /* Products */,
+				514959DA08431349CB437248 /* Pods */,
+				00F6F5A9B0B7862B4160B26B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +101,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		514959DA08431349CB437248 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C19F065F19A96B84B8E4DF8 /* Pods-Biodome.debug.xcconfig */,
+				8A1AAF2B42F0F8A20F48BD1F /* Pods-Biodome.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,9 +118,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D26AD1226EC50890026378F /* Build configuration list for PBXNativeTarget "Biodome" */;
 			buildPhases = (
+				CE1A13EA92B4EF0220A75806 /* [CP] Check Pods Manifest.lock */,
 				1D26ACFF26EC50880026378F /* Sources */,
 				1D26AD0026EC50880026378F /* Frameworks */,
 				1D26AD0126EC50880026378F /* Resources */,
+				3862917FAE7F9F4E31AEE187 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +176,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3862917FAE7F9F4E31AEE187 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Biodome/Pods-Biodome-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Biodome/Pods-Biodome-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Biodome/Pods-Biodome-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE1A13EA92B4EF0220A75806 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Biodome-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D26ACFF26EC50880026378F /* Sources */ = {
@@ -284,6 +353,7 @@
 		};
 		1D26AD1326EC50890026378F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C19F065F19A96B84B8E4DF8 /* Pods-Biodome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -307,6 +377,7 @@
 		};
 		1D26AD1426EC50890026378F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A1AAF2B42F0F8A20F48BD1F /* Pods-Biodome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
