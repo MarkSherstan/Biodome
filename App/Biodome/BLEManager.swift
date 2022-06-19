@@ -7,6 +7,25 @@
 
 import Foundation
 import CoreBluetooth
+import AWSIoT
+
+
+let credentials = AWSCognitoCredentialsProvider(regionType:.USWest1, identityPoolId:IDENTITY_POOL_ID)
+let configuration = AWSServiceConfiguration(region:.USWest1, credentialsProvider:credentialsProvider)
+AWSServiceManager.default().defaultServiceConfiguration = configuration
+
+//variables
+var iotDataManager: AWSIoTDataManager!
+let iotEndPoint = AWSEndpoint(urlString: IOT_ENDPOINT) // Access from AWS IoT Core --> Settings
+let credentials = AWSCognitoCredentialsProvider(regionType:AWS_REGION, identityPoolId:IDENTITY_POOL_ID)
+let iotDataConfiguration = AWSServiceConfiguration(region: AWS_REGION, endpoint: iotEndPoint, credentialsProvider: credentials) // credentials is the same var as created above
+AWSIoTDataManager.register(with: iotDataConfiguration!, forKey: "MyIotDataManager")
+iotDataManager = AWSIoTDataManager(forKey: "MyIotDataManager")
+
+
+
+
+
 
 let biodomeServiceCBUUID = CBUUID(string: "00000000-0000-4A5B-8D75-3E5B444BC3CF")
 let temperatureCharAlphaUUID = CBUUID(string: "00000001-AAAA-4A5B-8D75-3E5B444BC3CF")
